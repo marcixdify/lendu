@@ -1,0 +1,8 @@
+from importlib.metadata import files
+from rest_framework import serializers
+from lendu.models import Notices
+
+class NoticeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Notices
+        fields=('NoticeId','NoticeTitle','NoticeName', 'NoticeDescription', 'NoticeDateAdds')
