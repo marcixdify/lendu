@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ListNotice from '../components/ListNotice';
-
+import {Link} from 'react-router-dom';
 
 const NoticesList = () => {
 
@@ -22,6 +22,9 @@ const NoticesList = () => {
     <div>
         dsada
         <div className="notices">
+            <Link to="/notice/new/">
+            <button>Dodaj nowe ogłoszenie</button>
+            </Link>
         {notices.map((notice, index) => (
             <ListNotice key={index} notice={notice} />
         ))}
@@ -29,5 +32,6 @@ const NoticesList = () => {
     </div>
   )
 }
+// 2.09.48
 
 export default NoticesList

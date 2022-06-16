@@ -32,6 +32,15 @@ const NoticePage = () => {
     console.log('fetch'))
 }
 
+  let deleteNotice = async ()=> {
+    fetch(`http://127.0.0.1:8000/api/notices/${id}/delete/`, {
+      method: 'DELETE',
+      'headers':{
+        'Content-Type': 'application/json'
+      }
+
+    })
+  }
 
   let handleSubmit = ()=> {
     updateNotice();
@@ -41,6 +50,7 @@ const NoticePage = () => {
   return (
     <div>
         <button onClick={handleSubmit}>aktualizuj</button>
+        <button onClick={deleteNotice}>usun ogloszenie</button>
         <p>NotePage {notice?.NoticeTitle}</p>
         <textarea onChange={(e) => {setNotice({...notice, 'NoticeDescription' : e.target.value})}} defaultValue={notice?.NoticeDescription}></textarea>
     </div>

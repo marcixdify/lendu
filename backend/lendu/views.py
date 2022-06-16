@@ -60,3 +60,10 @@ def updateNotice(request,pk):
         serializer.save()
         
     return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def deleteNotice(request,pk):
+    notice = Notices.objects.get(NoticeId=pk)
+    notice.delete()
+    return Response("Ogłoszenie usuniete")
