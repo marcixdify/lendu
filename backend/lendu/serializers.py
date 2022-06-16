@@ -5,4 +5,4 @@ from lendu.models import Notices
 class NoticeSerializer(serializers.ModelSerializer):
     class Meta:
         model=Notices
-        fields=('NoticeId','NoticeTitle','NoticeName', 'NoticeDescription', 'NoticeDateAdds')
+        fields=('NoticeId','NoticeTitle','NoticeDescription', 'NoticeDateAdd')
