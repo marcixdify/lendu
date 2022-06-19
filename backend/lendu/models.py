@@ -10,6 +10,7 @@ class Notices(models.Model):
     NoticeTitle = models.CharField(max_length=50)
     NoticeDescription = models.CharField(max_length=500)
     NoticeDateAdd = models.DateTimeField(auto_now_add=True)
+    NoticeDateUpdate = models.DateTimeField(auto_now=True)
     NoticeImg = models.ImageField(upload_to=upload_to, blank=True, null=True)
 
     def __str__(self):

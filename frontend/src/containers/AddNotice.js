@@ -3,6 +3,7 @@ import { withRouter } from "../components/withRouter"; // new import
 import { connect } from "react-redux"; // new import
 import PropTypes from "prop-types"; // new import
 import * as actions from "../store/actions/auth";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import {
   Container,

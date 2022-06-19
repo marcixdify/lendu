@@ -6,4 +6,4 @@ class NoticeSerializer(serializers.ModelSerializer):
     NoticeImg = serializers.ImageField(required=False)
     class Meta:
         model=Notices
-        fields=('NoticeId','NoticeTitle','NoticeDescription', 'NoticeDateAdd', 'NoticeImg')
+        fields=('NoticeId','NoticeTitle','NoticeDescription', 'NoticeDateAdd', 'NoticeImg', 'NoticeDateUpdate')
