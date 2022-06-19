@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "../components/withRouter"; // new import
 import { connect } from "react-redux"; // new import
 import PropTypes from "prop-types"; // new import
-import * as actions from '../store/actions/auth';
+import * as actions from "../store/actions/auth";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -10,39 +10,51 @@ import {
   Row,
   Col,
   Form,
-  FormControl
+  FormControl,
 } from "react-bootstrap";
 
 //import { authAddNotice } from "../store/actions/auth"; // new import
 
 class AddNotice extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
       NoticeTitle: "",
-      NoticeDescription: ""
+      NoticeDescription: "",
+      NoticeImg: "",
     };
   }
-  
-  onChange = e => {
+
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+   handleImageChange = (e) => {
+    this.setState({ [e.target.name]: e.target.files[0] });
+
+};
+
   // update function to call the action
   onSignupClick = () => {
+    let form_data = new FormData();
+    form_data.append('NoticeTitle', this.state.NoticeTitle,);
+    form_data.append('NoticeDescription', this.state.NoticeDescription);
+    form_data.append('NoticeImg', this.state.NoticeImg);
+    console.log(form_data)
     const userData = {
       NoticeTitle: this.state.NoticeTitle,
-      NoticeDescription: this.state.NoticeDescription
+      NoticeDescription: this.state.NoticeDescription,
+      NoticeImg: this.state.NoticeImg
     };
     let NoticeTitle = userData.NoticeTitle;
     let NoticeDescription = userData.NoticeDescription;
-    console.log(userData.NoticeTitle, userData.NoticeDescription)
-    this.props.onAuth(NoticeTitle, NoticeDescription); // <-- signup new user request
+    let NoticeImg = userData.NoticeImg;
+    console.log(form_data)
+   // console.log(userData.NoticeTitle, userData.NoticeDescription, userData.NoticeImg);
+    this.props.onAuth(form_data); // <-- signup new user request
   };
 
   render() {
-    
     return (
       <Container>
         <Row>
@@ -59,28 +71,35 @@ class AddNotice extends Component {
                   value={this.state.NoticeTitle}
                   onChange={this.onChange}
                 />
-
               </Form.Group>
 
               <Form.Group controlId="passwordId">
                 <Form.Label>Wprowadz opis</Form.Label>
                 <Form.Control
-                 // isInvalid={this.props.createUser.passwordError}
+                  // isInvalid={this.props.createUser.passwordError}
                   type="text"
                   name="NoticeDescription"
                   placeholder="Wprowadz opis"
                   value={this.NoticeDescription}
                   onChange={this.onChange}
                 />
-                <Form.Control.Feedback type="invalid">
-
-                </Form.Control.Feedback>
               </Form.Group>
+
+              <Form.Group controlId="passwordId">
+                <Form.Label>Dodaj zdjecie</Form.Label>
+                <Form.Control
+                  // isInvalid={this.props.createUser.passwordError}
+                  type="file"
+                  name="NoticeImg"
+                  accept="image/jpeg,image/png,image/gif,image/jpg"
+                  onChange={this.handleImageChange}
+                />
+              </Form.Group>
+
             </Form>
             <Button color="primary" onClick={this.onSignupClick}>
               Dodaj ogłoszenie
             </Button>
-
           </Col>
         </Row>
       </Container>
@@ -89,7 +108,7 @@ class AddNotice extends Component {
 }
 
 // connect action and reducer
-// replace 
+// replace
 // export default Signup;
 // with code below:
 
@@ -98,11 +117,12 @@ class AddNotice extends Component {
 //   createUser: PropTypes.object.isRequired
 // };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-      onAuth: (NoticeTitle, NoticeDescription) => dispatch(actions.authAddNotice(NoticeTitle, NoticeDescription)) 
-  }
-}
+    onAuth: (form_data) =>
+      dispatch(actions.authAddNotice(form_data)),
+  };
+};
 
 // const mapStateToProps = state => ({
 //   createUser: state.createUser
