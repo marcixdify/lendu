@@ -1,13 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-
+import ReactDOM from 'react-dom';
 import App from './App';
+import {createRoot} from 'react-dom/client';
+import { createStore, compose, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+
+// reducer from './store/reducers/auth';
+
+const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore( composeEnhances(
+    applyMiddleware(thunk)
+));
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+const app = (
+    <Provider store={store}>
+        <App />
+    </Provider>
+)
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+{app}
   </React.StrictMode>
 );
-

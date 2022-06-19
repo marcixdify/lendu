@@ -22,9 +22,9 @@ const NoticesList = () => {
     <div>
         dsada
         <div className="notices">
-            <Link to="/notice/new/">
+            {/* <Link to="/notice/new/">
             <button>Dodaj nowe ogłoszenie</button>
-            </Link>
+            </Link> */}
         {notices.map((notice, index) => (
             <ListNotice key={index} notice={notice} />
         ))}

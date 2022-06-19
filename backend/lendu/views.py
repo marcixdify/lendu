@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Notices
 from .serializers import NoticeSerializer
+from rest_framework.parsers import JSONParser
 
 # Create your views here.
 
@@ -67,3 +68,31 @@ def deleteNotice(request,pk):
     notice = Notices.objects.get(NoticeId=pk)
     notice.delete()
     return Response("Ogłoszenie usuniete")
+
+
+# @api_view(['POST'])
+# def createNotice(request):
+    # data = request.data
+    # notice = Notices.objects.create(
+    #     NoticeTitle=data['NoticeTitle'],
+    #     NoticeDescription=data['NoticeDescription']
+    # )
+    # serializer = NoticeSerializer(notice, many=False)
+        
+    # return Response(serializer.data)
+    # notice_data=JSONParser().parse(request)
+    # notices_serializer=NoticeSerializer(data=notice_data)
+    # if notices_serializer.is_valid():
+    #     NoticeSerializer.save()
+    #     return Response('Dodano pomyslnie',safe=False)
+    # return Response("Bledne dodanie", safe=False)
+
+
+
+@api_view(['POST'])
+def createNotice(request):
+    serializer = NoticeSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors)
