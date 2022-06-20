@@ -75,7 +75,7 @@ class NoticePage extends Component {
 
     };
     let { id } = useParams();
-    console.log(id)
+    console.log(id);
     let NoticeTitle = userData.NoticeTitle;
     let NoticeDescription = userData.NoticeDescription;
     let NoticeImg = userData.NoticeImg;
