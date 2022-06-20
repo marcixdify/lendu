@@ -13,6 +13,7 @@ class Notices(models.Model):
     NoticeDateUpdate = models.DateTimeField(auto_now=True)
     NoticeCategory = models.CharField(max_length=50, blank=True, default="Brak")
     NoticeImg = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    
 
     def __str__(self):
         return self.NoticeTitle[0:50]
