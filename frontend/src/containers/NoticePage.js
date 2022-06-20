@@ -131,13 +131,14 @@ render() {
                 <div class="col-lg-7 col-md-7 col-sm-6">
                     <h4 class="box-title mt-5">Opis ogłoszenia:</h4>
                     <p>{ this.state.getDataNotice.NoticeDescription }</p>
-                    {/* <h2 class="mt-5">
-                        $153<small class="text-success">(36%off)</small>
+                    <h2 class="mt-5">
+                      Cena: 
+                    { this.state.getDataNotice.NoticeCredit } zł
                     </h2>
                     <button class="btn btn-dark btn-rounded mr-1" data-toggle="tooltip" title="" data-original-title="Add to cart">
                         <i class="fa fa-shopping-cart"></i>
                     </button>
-                    <button class="btn btn-primary btn-rounded">Buy Now</button> */}
+                    <button class="btn btn-primary btn-rounded">Kontakt</button>
                     {/* <h3 class="box-title mt-5">Key Highlights</h3>
                     <ul class="list-unstyled">
                         <li><i class="fa fa-check text-success"></i>Sturdy structure</li>
