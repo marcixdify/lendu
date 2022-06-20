@@ -4,7 +4,6 @@ import axios from 'axios';
 
 export const authAddNotice = (form_data) => {
 
-
         axios
         .post("http://127.0.0.1:8000/api/notices/create/", form_data,{
           headers: {
