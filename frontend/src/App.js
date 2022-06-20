@@ -8,6 +8,7 @@ import AddNotice from "./containers/AddNotice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BaseRouter from './routes';
 //damian sie sprzedal
+//dupa chuj
 
 function App() {
   return (
