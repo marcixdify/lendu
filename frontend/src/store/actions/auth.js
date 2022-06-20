@@ -28,7 +28,7 @@ console.log(form_data)
 console.log(id)
 
       axios
-      .put(`http://127.0.0.1:8000/api/notices/`+id+`/update/`, form_data,{
+      .put(`http://127.0.0.1:8000/api/notices/${id}/update/`, form_data,{
         headers: {
           'content-type': 'multipart/form-data'
         }
@@ -44,6 +44,28 @@ console.log(id)
         }
       });
   }
+
+  export const authDeleteNotice = (id) => {
+    
+    console.log(id)
+    
+          axios
+          .delete(`http://127.0.0.1:8000/api/notices/${id}/delete/`,{
+            headers: {
+              'content-type': 'application/json'
+            }
+          })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch(function (error) {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            }
+          });
+      }
 
 
 

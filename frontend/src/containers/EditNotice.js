@@ -17,10 +17,10 @@ import {
 
 
 
-class NoticePage extends Component {
+class EditNotice extends Component {
   //let noticeId = match.params.id;
 
-  
+
 
 
   // let deleteNotice = async ()=> {
@@ -35,7 +35,7 @@ class NoticePage extends Component {
 
   // let handleSubmit = ()=> {
   //   updateNotice();
- 
+
   // }
 
   constructor(props) {
@@ -53,10 +53,10 @@ class NoticePage extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-   handleImageChange = (e) => {
+  handleImageChange = (e) => {
     this.setState({ [e.target.name]: e.target.files[0] });
 
-};
+  };
 
 
 
@@ -66,7 +66,10 @@ class NoticePage extends Component {
     form_data.append('NoticeTitle', this.state.NoticeTitle,);
     form_data.append('NoticeDescription', this.state.NoticeDescription);
     form_data.append('NoticeImg', this.state.NoticeImg);
-    console.log(form_data)
+    //console.log(form_data)
+    let toSliceId = window.location.pathname
+    let id = toSliceId.slice(13)
+
     const userData = {
       NoticeTitle: this.state.NoticeTitle,
       NoticeDescription: this.state.NoticeDescription,
@@ -74,87 +77,102 @@ class NoticePage extends Component {
 
 
     };
-    let { id } = useParams();
-    console.log(id);
+
+
     let NoticeTitle = userData.NoticeTitle;
     let NoticeDescription = userData.NoticeDescription;
     let NoticeImg = userData.NoticeImg;
-    console.log(userData.id)
+    //console.log(userData.id)
 
-   // console.log(userData.NoticeTitle, userData.NoticeDescription, userData.NoticeImg);
-    this.props.onAuth(form_data); // <-- signup new user request
+    // console.log(userData.NoticeTitle, userData.NoticeDescription, userData.NoticeImg);
+    this.props.onAuth(form_data, id); // <-- signup new user request
   };
 
-render() {
+  onDeleteClick = () => {
+   
+    let toSliceId = window.location.pathname
+    let id = toSliceId.slice(13)
+    console.log("usuń")
+    this.props.onAuthDelete(id)
+  };
 
-  return (
-    
-    <Container>
-    <Row>
-      <Col md="4">
-        <h1>Edytuj ogłoszenie</h1>
-        <Form>
-          <Form.Group controlId="usernameId">
-            <Form.Label>Edytuj tytuł ogłoszenia:</Form.Label>
-            <Form.Control
-              //isInvalid={this.props.createUser.usernameError}
-              type="text"
-              name="NoticeTitle"
-              placeholder="Wprowadz tytul"
-              value={this.state.NoticeTitle}
-              onChange={this.onChange}
-            />
-          </Form.Group>
-          {/* <div>
+  render() {
+
+    return (
+
+      <Container>
+        <Row>
+          <Col md="4">
+            <h1>Edytuj ogłoszenie</h1>
+            <Form>
+              <Form.Group controlId="usernameId">
+                <Form.Label>Edytuj tytuł ogłoszenia:</Form.Label>
+                <Form.Control
+                  //isInvalid={this.props.createUser.usernameError}
+                  type="text"
+                  name="NoticeTitle"
+                  placeholder="Wprowadz tytul"
+                  value={this.state.NoticeTitle}
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+              {/* <div>
         <button onClick={handleSubmit}>aktualizuj</button>
         <button onClick={deleteNotice}>usun ogloszenie</button>
         <p>NotePage {notice?.NoticeTitle}</p>
         <textarea onChange={(e) => {setNotice({...notice, 'NoticeDescription' : e.target.value})}} defaultValue={notice?.NoticeDescription}></textarea>
     </div> */}
 
-          <Form.Group controlId="passwordId">
-            <Form.Label>Edytuj opis</Form.Label>
-            <Form.Control
-              // isInvalid={this.props.createUser.passwordError}
-              type="text"
-              name="NoticeDescription"
-              placeholder="Wprowadz opis"
-              value={this.NoticeDescription}
-              onChange={this.onChange}
-            />
-          </Form.Group>
+              <Form.Group controlId="passwordId">
+                <Form.Label>Edytuj opis</Form.Label>
+                <Form.Control
+                  // isInvalid={this.props.createUser.passwordError}
+                  type="text"
+                  name="NoticeDescription"
+                  placeholder="Wprowadz opis"
+                  value={this.NoticeDescription}
+                  onChange={this.onChange}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="passwordId">
-            <Form.Label>Edytuj zdjecie</Form.Label>
-            <Form.Control
-              // isInvalid={this.props.createUser.passwordError}
-              type="file"
-              name="NoticeImg"
-              accept="image/jpeg,image/png,image/gif,image/jpg"
-              onChange={this.handleImageChange}
-            />
-          </Form.Group>
+              <Form.Group controlId="passwordId">
+                <Form.Label>Edytuj zdjecie</Form.Label>
+                <Form.Control
+                  // isInvalid={this.props.createUser.passwordError}
+                  type="file"
+                  name="NoticeImg"
+                  accept="image/jpeg,image/png,image/gif,image/jpg"
+                  onChange={this.handleImageChange}
+                />
+              </Form.Group>
 
-        </Form>
-        <Button color="primary" onClick={this.onSignupClick}>
-          Dodaj ogłoszenie
-        </Button>
-      </Col>
-    </Row>
-  </Container>
+            </Form>
+            <Button color="primary" onClick={this.onSignupClick}>
+              Dodaj ogłoszenie
+            </Button>
+            <Button color="primary" onClick={this.onDeleteClick}>
+              Usuń
+            </Button>
+          </Col>
+        </Row>
+      </Container>
 
-  )
-}
+    )
+  }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
 
   return {
-    
+
     onAuth: (form_data, id) =>
       dispatch(actions.authEditNotice(form_data, id)),
+
+    onAuthDelete: (id) =>
+      dispatch(actions.authDeleteNotice(id)),
+
   };
 };
 
-export default connect(mapDispatchToProps)(withRouter(NoticePage));
+export default connect(mapDispatchToProps)(withRouter(EditNotice));

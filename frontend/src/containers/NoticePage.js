@@ -108,6 +108,7 @@ class NoticePage extends Component {
    // console.log(userData.NoticeTitle, userData.NoticeDescription, userData.NoticeImg);
     this.props.onAuth(form_data, id); // <-- signup new user request
   };
+  
 
 render() {
 
