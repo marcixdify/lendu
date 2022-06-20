@@ -13,6 +13,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/" exact element={<NoticesList />} />
           <Route path="/notice/:id"  element={<NoticePage />} />
