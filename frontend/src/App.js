@@ -7,7 +7,7 @@ import NoticePage from "./containers/NoticePage";
 import AddNotice from "./containers/AddNotice";
 import "bootstrap/dist/css/bootstrap.min.css";
 //damian sie sprzedal
-//dupa chuj
+
 
 function App() {
   return (
