@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'lendu.apps.LenduConfig',
+    'djmoney',
 ]
 
 CORS_ORIGIIN_ALLOW_ALL = True
