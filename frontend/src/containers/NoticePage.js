@@ -88,6 +88,10 @@ class NoticePage extends Component {
     form_data.append('NoticeDescription', this.state.NoticeDescription);
     form_data.append('NoticeImg', this.state.NoticeImg);
     console.log(form_data)
+    let toSliceId = window.location.pathname
+    let id = toSliceId.slice(8)
+    
+    
     const userData = {
       NoticeTitle: this.state.NoticeTitle,
       NoticeDescription: this.state.NoticeDescription,
@@ -95,15 +99,14 @@ class NoticePage extends Component {
 
 
     };
-    let { id } = useParams();
-    console.log(id);
+    
     let NoticeTitle = userData.NoticeTitle;
     let NoticeDescription = userData.NoticeDescription;
     let NoticeImg = userData.NoticeImg;
     console.log(userData.id)
 
    // console.log(userData.NoticeTitle, userData.NoticeDescription, userData.NoticeImg);
-    this.props.onAuth(form_data); // <-- signup new user request
+    this.props.onAuth(form_data, id); // <-- signup new user request
   };
 
 render() {
@@ -270,13 +273,13 @@ render() {
 }
 
 
-const mapDispatchToProps = (dispatch, state) => {
+const mapDispatchToProps = (dispatch) => {
 
   return {
 
     onAuth: (form_data, id) =>
       dispatch(actions.authEditNotice(form_data, id)),
   };
-};
+}
 
 export default connect(mapDispatchToProps)(withRouter(NoticePage));

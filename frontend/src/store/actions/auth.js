@@ -24,10 +24,11 @@ export const authAddNotice = (form_data) => {
     }
 
 export const authEditNotice = (form_data, id) => {
+console.log(form_data)
 console.log(id)
 
       axios
-      .put(`http://127.0.0.1:8000/api/notices/${id}/`, form_data,{
+      .put(`http://127.0.0.1:8000/api/notices/`+id+`/update/`, form_data,{
         headers: {
           'content-type': 'multipart/form-data'
         }
