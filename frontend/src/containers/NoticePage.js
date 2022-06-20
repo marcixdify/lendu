@@ -164,57 +164,7 @@ render() {
     </div>
 
 
-    <Row>
-      <Col md="4">
-        <h1>Edytuj ogłoszenie</h1>
-        <Form>
-          <Form.Group controlId="usernameId">
-            <Form.Label>Edytuj tytuł ogłoszenia:</Form.Label>
-            <Form.Control
-              //isInvalid={this.props.createUser.usernameError}
-              type="text"
-              name="NoticeTitle"
-              placeholder="Wprowadz tytul"
-              value={this.state.NoticeTitle}
-              onChange={this.onChange}
-            />
-          </Form.Group>
-          {/* <div>
-        <button onClick={handleSubmit}>aktualizuj</button>
-        <button onClick={deleteNotice}>usun ogloszenie</button>
-        <p>NotePage {notice?.NoticeTitle}</p>
-        <textarea onChange={(e) => {setNotice({...notice, 'NoticeDescription' : e.target.value})}} defaultValue={notice?.NoticeDescription}></textarea>
-    </div> */}
 
-          <Form.Group controlId="passwordId">
-            <Form.Label>Edytuj opis</Form.Label>
-            <Form.Control
-              // isInvalid={this.props.createUser.passwordError}
-              type="text"
-              name="NoticeDescription"
-              placeholder="Wprowadz opis"
-              value={this.NoticeDescription}
-              onChange={this.onChange}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="passwordId">
-            <Form.Label>Edytuj zdjecie</Form.Label>
-            <Form.Control
-              // isInvalid={this.props.createUser.passwordError}
-              type="file"
-              name="NoticeImg"
-              accept="image/jpeg,image/png,image/gif,image/jpg"
-              onChange={this.handleImageChange}
-            />
-          </Form.Group>
-
-        </Form>
-        <Button color="primary" onClick={this.onSignupClick}>
-          Dodaj ogłoszenie
-        </Button>
-      </Col>
-    </Row>
   </Container>
 
   )
