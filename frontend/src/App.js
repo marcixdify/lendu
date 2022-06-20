@@ -6,7 +6,7 @@ import Home from "./containers/HomePage";
 import NoticePage from "./containers/NoticePage";
 import AddNotice from "./containers/AddNotice";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+//damian sie sprzedal
 
 function App() {
   return (
