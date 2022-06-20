@@ -44,6 +44,8 @@ class EditNotice extends Component {
       NoticeTitle: "",
       NoticeDescription: "",
       NoticeImg: "",
+      NoticeCategory: "",
+      NoticeCredit: "",
     };
   }
 
@@ -65,6 +67,8 @@ class EditNotice extends Component {
     let form_data = new FormData();
     form_data.append('NoticeTitle', this.state.NoticeTitle,);
     form_data.append('NoticeDescription', this.state.NoticeDescription);
+    form_data.append('NoticeCategory', this.state.NoticeCategory);
+    form_data.append('NoticeCredit', this.state.NoticeCredit);
     form_data.append('NoticeImg', this.state.NoticeImg);
     //console.log(form_data)
     let toSliceId = window.location.pathname
@@ -131,6 +135,30 @@ class EditNotice extends Component {
                   name="NoticeDescription"
                   placeholder="Wprowadz opis"
                   value={this.NoticeDescription}
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="passwordId">
+                <Form.Label>Edytuj kategorie</Form.Label>
+                <Form.Control
+                  // isInvalid={this.props.createUser.passwordError}
+                  type="text"
+                  name="NoticeCategory"
+                  placeholder="Edytuj kategoire"
+                  value={this.NoticeCategory}
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="passwordId">
+                <Form.Label>Edytuj cene</Form.Label>
+                <Form.Control
+                  // isInvalid={this.props.createUser.passwordError}
+                  type="text"
+                  name="NoticeCredit"
+                  placeholder="Wprowadz cene"
+                  value={this.NoticeCredit}
                   onChange={this.onChange}
                 />
               </Form.Group>

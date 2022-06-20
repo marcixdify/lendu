@@ -24,6 +24,7 @@ class AddNotice extends Component {
       NoticeDescription: "",
       NoticeImg: "",
       NoticeCategory: "",
+      NoticeCredit: "",
     };
   }
 
@@ -43,6 +44,7 @@ class AddNotice extends Component {
     form_data.append('NoticeDescription', this.state.NoticeDescription);
     form_data.append('NoticeCategory', this.state.NoticeCategory);
     form_data.append('NoticeImg', this.state.NoticeImg);
+    form_data.append('NoticeCredit', this.state.NoticeCredit);
     console.log(form_data)
     const userData = {
       NoticeTitle: this.state.NoticeTitle,
@@ -97,6 +99,19 @@ class AddNotice extends Component {
                   name="NoticeCategory"
                   placeholder="Wprowadz kategorie"
                   value={this.NoticeCategory}
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+
+
+              <Form.Group controlId="passwordId">
+                <Form.Label>Wprowadz cene</Form.Label>
+                <Form.Control
+                  // isInvalid={this.props.createUser.passwordError}
+                  type="number"
+                  name="NoticeCredit"
+                  placeholder="Wprowadz cene"
+                  value={this.NoticeCredit}
                   onChange={this.onChange}
                 />
               </Form.Group>
