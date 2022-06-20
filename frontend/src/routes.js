@@ -6,19 +6,14 @@ import Home from "./containers/HomePage";
 import NoticePage from "./containers/NoticePage";
 import AddNotice from "./containers/AddNotice";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BaseRouter from './routes';
-//damian sie sprzedal
 
+const BaseRouter = () => (
+    <Routes>
+        <Route path="/" exact element={<Home />} />
+          <Route path="/notices" exact element={<NoticesList />} />
+          <Route path="/notice/:id"  element={<NoticePage />} />
+          <Route path="/notice/add"  element={<AddNotice />} />
+    </Routes>
+);
 
-function App() {
-  return (
-    <div>
-      <BrowserRouter>
-        <Navbar />
-          <BaseRouter/>
-      </BrowserRouter>
-    </div>
-  );
-}
-
-export default App;
+export default BaseRouter;
