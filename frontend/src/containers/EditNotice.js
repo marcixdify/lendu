@@ -176,7 +176,7 @@ class EditNotice extends Component {
 
             </Form>
             <Button color="primary" onClick={this.onSignupClick}>
-              Dodaj ogłoszenie
+              Edytuj
             </Button>
             <Button color="primary" onClick={this.onDeleteClick}>
               Usuń
