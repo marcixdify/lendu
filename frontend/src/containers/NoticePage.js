@@ -20,7 +20,7 @@ import {
 class NoticePage extends Component {
   //let noticeId = match.params.id;
 
-
+  
 
 
   // let deleteNotice = async ()=> {
