@@ -9,7 +9,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const BaseRouter = () => (
     <Routes>
-          <Route path="/" exact element={<NoticesList />} />
+        <Route path="/" exact element={<Home />} />
+          <Route path="/notices" exact element={<NoticesList />} />
           <Route path="/notice/:id"  element={<NoticePage />} />
           <Route path="/notice/add"  element={<AddNotice />} />
     </Routes>
