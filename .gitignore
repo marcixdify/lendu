@@ -26,3 +26,5 @@ frontend/node_modules/.staging/@babel/core-475daaa2/lib/config/resolve-targets-b
 backend/Pipfile
 backend/Pipfile.lock
 
+Pipfile.lock
+Pipfile

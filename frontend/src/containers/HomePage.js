@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { Component } from "react";
+import { Container } from "react-bootstrap";
 
-function HomePage() {
-  return (
-    <div>HomePage</div>
-  )
+class HomePage extends Component {
+  render() {
+    return (
+      <Container>
+        <h1>Home</h1>
+      </Container>
+    );
+  }
 }
 
-export default HomePage
+export default HomePage;
