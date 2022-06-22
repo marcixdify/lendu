@@ -18,25 +18,7 @@ import {
 
 
 class EditNotice extends Component {
-  //let noticeId = match.params.id;
 
-
-
-
-  // let deleteNotice = async ()=> {
-  //   fetch(`http://127.0.0.1:8000/api/notices/${id}/delete/`, {
-  //     method: 'DELETE',
-  //     'headers':{
-  //       'Content-Type': 'application/json'
-  //     }
-
-  //   })
-  // }
-
-  // let handleSubmit = ()=> {
-  //   updateNotice();
-
-  // }
 
   constructor(props) {
     super(props);

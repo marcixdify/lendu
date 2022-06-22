@@ -41,17 +41,22 @@ INSTALLED_APPS = [
     'corsheaders',
     'lendu.apps.LenduConfig',
     'djmoney',
-    'knox',  
+    'knox',
+    'accounts',
 ]
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [  # remove
     #     'rest_framework.permissions.AllowAny'
     # ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (  # added
-        'knox.auth.TokenAuthentication',
+        'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
     ),
-    'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
+    'DEFAULT_AUTHENTICATION_CLASSES': (  # added
+        'knox.auth.TokenAuthentication', #'accounts.backend.ExampleAuthentication'
+
+    ),
+  #  'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
 }
 
 CORS_ORIGIIN_ALLOW_ALL = True

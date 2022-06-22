@@ -6,12 +6,12 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import "bootstrap/dist/css/bootstrap.min.css";
-
-// reducer from './store/reducers/auth';
+import "react-toastify/dist/ReactToastify.css";
+import reducer from './store/reducers/auth';
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const store = createStore( composeEnhances(
+const store = createStore(reducer, composeEnhances(
     applyMiddleware(thunk)
 ));
 const rootElement = document.getElementById('root');
