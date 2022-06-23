@@ -42,18 +42,18 @@ INSTALLED_APPS = [
     'lendu.apps.LenduConfig',
     'djmoney',
     'knox',
-    'accounts',
+    'accounts.apps.AccountsConfig',
 ]
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [  # remove
     #     'rest_framework.permissions.AllowAny'
     # ],
-        'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
+    #     'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.AllowAny',
+    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': (  # added
-        'knox.auth.TokenAuthentication', #'accounts.backend.ExampleAuthentication'
+        'knox.auth.TokenAuthentication', 'accounts.backend.ExampleAuthentication'
 
     ),
   #  'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
@@ -141,6 +141,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+AUTH_USER_MODEL = 'accounts.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

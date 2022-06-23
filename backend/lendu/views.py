@@ -5,7 +5,7 @@ from .models import Notices
 from .serializers import NoticeSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework import viewsets, permissions
-from .serializers import TodoSerializer
+#from .serializers import TodoSerializer
 # Create your views here.
 
 
@@ -83,13 +83,13 @@ def createNotice(request):
 
 
 
-class TodoViewSet(viewsets.ModelViewSet):
-    # queryset = Todo.objects.all()  # remove
-    serializer_class = TodoSerializer
-    permission_classes = [permissions.IsAuthenticated]  # added
+# class TodoViewSet(viewsets.ModelViewSet):
+#     # queryset = Todo.objects.all()  # remove
+#     serializer_class = TodoSerializer
+#     permission_classes = [permissions.IsAuthenticated]  # added
 
-    def get_queryset(self):  # added
-        return self.request.user.todos.all()
+#     def get_queryset(self):  # added
+#         return self.request.user.todos.all()
 
-    def perform_create(self, serializer):  # added
-        serializer.save(owner=self.request.user)
+#     def perform_create(self, serializer):  # added
+#         serializer.save(owner=self.request.user)
