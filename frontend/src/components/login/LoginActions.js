@@ -6,9 +6,14 @@ import { setAxiosAuthToken, toastOnError } from "../../utils/Utils";
 
 export const login = (userData, redirectTo) => dispatch => {
   axios
-    .post("http://127.0.0.1:8000/api/auth/login/", userData)
+    .post("http://127.0.0.1:8000/api/auth/user/login/", userData)
     .then(response => {
-      const { auth_token } = response.data;
+      const auth_token  = response.data.token;
+   //   const token = response.data.token;
+    //  console.log(token)
+   //   const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+   //   localStorage.setItem('Token', token);
+    //  localStorage.setItem('expirationDate', expirationDate);
       setAxiosAuthToken(auth_token);
       dispatch(setToken(auth_token));
       dispatch(getCurrentUser(redirectTo));
@@ -20,11 +25,12 @@ export const login = (userData, redirectTo) => dispatch => {
 };
 
 export const getCurrentUser = redirectTo => dispatch => {
+
   axios
-    .get("/api/v1/users/me/")
+    .get("http://127.0.0.1:8000/api/auth/user/test/", axios.defaults.headers.common,)
     .then(response => {
       const user = {
-        username: response.data.username,
+        //username: response.data.username,
         email: response.data.email
       };
       dispatch(setCurrentUser(user, redirectTo));
@@ -36,7 +42,7 @@ export const getCurrentUser = redirectTo => dispatch => {
 };
 
 export const setCurrentUser = (user, redirectTo) => dispatch => {
-  localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem("user", user.email);
   dispatch({
     type: SET_CURRENT_USER,
     payload: user
