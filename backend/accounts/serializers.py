@@ -49,6 +49,7 @@ class RegisterTestUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_test_user(
             email=validated_data['email'],
+            username=validated_data['username'],
             password = validated_data['password'],
             phone=validated_data['phone'],
         )
@@ -56,11 +57,13 @@ class RegisterTestUserSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     #password2 = serializers.CharField(write_only=True, required=True)
+    username = serializers.CharField(write_only=True, required=True)
+
     phone = serializers.IntegerField(write_only=True, required=True)
 
     class Meta:
         model = User
-        fields = ('email','password','phone')
+        fields = ('email', 'username','password','phone')
 
 
 class LoginUserSerializer(serializers.Serializer):
@@ -77,6 +80,6 @@ class LoginUserSerializer(serializers.Serializer):
 class AccountTestUserSerializer(serializers.ModelSerializer):    
     class Meta:
         model = User
-        fields = ['identifier', 'email','phone',]
+        fields = ['identifier', 'email','phone', 'username',]
 
     phone = serializers.IntegerField(source='testuser.phone')

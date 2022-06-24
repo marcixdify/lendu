@@ -4,7 +4,7 @@ import { connect } from "react-redux";          // new import
 import PropTypes from "prop-types";             // new import 
 import { Link } from "react-router-dom";
 import { Container, Button, Row, Col, Form } from "react-bootstrap";
-
+import * as actions from '../../store/actions/auth';
 import { login } from "./LoginActions.js";      // new import 
 
 class Login extends Component {
@@ -24,7 +24,7 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    this.props.login(userData, "/dashboard"); // <--- login request
+    this.props.onAuth(userData); // <--- login request
   };
   render() {
     return (
@@ -69,15 +69,17 @@ class Login extends Component {
 }
 
 // connect action and store and component
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
+const mapStateToProps = (state) => {
+  return {
+      loading: state.loading,
+      error: state.error
+  }
+}
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
+const mapDispatchToProps = dispatch => {
+  return {
+      onAuth: (userData) => dispatch(actions.authLogin(userData)) 
+  }
+}
 
-export default connect(mapStateToProps, {
-  login
-})(withRouter(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

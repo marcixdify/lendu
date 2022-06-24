@@ -49,11 +49,11 @@ REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [  # remove
     #     'rest_framework.permissions.AllowAny'
     # ],
-    #     'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.AllowAny',
-    # ),
+        'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (  # added
-        'knox.auth.TokenAuthentication', 'accounts.backend.ExampleAuthentication'
+        'knox.auth.TokenAuthentication', #'accounts.backend.ExampleAuthentication'
 
     ),
   #  'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",

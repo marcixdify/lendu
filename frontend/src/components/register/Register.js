@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux"; // new import
 import PropTypes from "prop-types"; // new import
 import { Link } from "react-router-dom";
+import * as actions from '../../store/actions/auth'
 import { withRouter } from "../withRouter";
 import {
   Container,
@@ -14,13 +15,14 @@ import {
 
 import { signupNewUser } from "./RegisterActions"; // new import
 
-class Signup extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      email: "",
       username: "",
       password: "",
-      email: ""
+      phone: "",
     };
   }
   onChange = e => {
@@ -30,11 +32,12 @@ class Signup extends Component {
   // update function to call the action
   onSignupClick = () => {
     const userData = {
+      email: this.state.email,
       username: this.state.username,
       password: this.state.password,
-      email: this.state.email,
+      phone: this.state.phone,
     };
-    this.props.signupNewUser(userData); // <-- signup new user request
+    this.props.onAuth(userData); // <-- signup new user request
   };
 
   render() {
@@ -65,8 +68,24 @@ class Signup extends Component {
 
                   type="email"
                   name="email"
-                  placeholder="Enter user name"
+                  placeholder="Enter email"
                   value={this.state.email}
+                  onChange={this.onChange}
+                />
+                <FormControl.Feedback type="invalid">
+
+                </FormControl.Feedback>
+              </Form.Group>
+
+
+              <Form.Group controlId="usernameId">
+                <Form.Label>Telefon:</Form.Label>
+                <Form.Control
+
+                  type="number"
+                  name="phone"
+                  placeholder="Wpisz numer telefonu"
+                  value={this.state.phone}
                   onChange={this.onChange}
                 />
                 <FormControl.Feedback type="invalid">
@@ -81,7 +100,7 @@ class Signup extends Component {
                   type="password"
                   name="password"
                   placeholder="Enter password"
-                  value={this.password}
+                  value={this.state.password}
                   onChange={this.onChange}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -106,13 +125,17 @@ class Signup extends Component {
 // export default Signup;
 // with code below:
 
-Signup.propTypes = {
-  signupNewUser: PropTypes.func.isRequired,
-  createUser: PropTypes.object.isRequired
-};
+const mapStateToProps = (state) => {
+  return {
+      loading: state.loading,
+      error: state.error
+  }
+}
 
-const mapStateToProps = state => ({
-  createUser: state.createUser
-});
+const mapDispatchToProps = dispatch => {
+  return {
+      onAuth: (userData) => dispatch(actions.authSignup(userData)) 
+  }
+}
 
-export default connect(mapStateToProps, {signupNewUser})(withRouter(Signup));
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

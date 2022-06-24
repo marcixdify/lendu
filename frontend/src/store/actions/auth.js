@@ -1,141 +1,194 @@
-import axios from 'axios';
-import * as actionTypes from './ActionTypes';
+import axios from "axios";
+import * as actionTypes from "./ActionTypes";
 
 export const authStart = () => {
   return {
-      type: actionTypes.AUTH_START
-  }
-}
+    type: actionTypes.AUTH_START,
+  };
+};
 
-export const authSuccess = token => {
+export const authSuccess = (token) => {
   return {
-      type: actionTypes.AUTH_SUCCESS,
-      token: token
-  }
-}
+    type: actionTypes.AUTH_SUCCESS,
+    token: token,
+  };
+};
 
-export const authFail = error => {
+export const authFail = (error) => {
   return {
-      type: actionTypes.AUTH_FAIL,
-      error: error
-  }
-}
+    type: actionTypes.AUTH_FAIL,
+    error: error,
+  };
+};
 
 export const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('expirationDate');
+  localStorage.removeItem("token");
+  localStorage.removeItem("expirationDate");
+  logoutApi()
   return {
-      type: actionTypes.AUTH_LOGOUT
+    type: actionTypes.AUTH_LOGOUT,
   };
-}
+};
 
-export const checkAuthTimeout = expirationTime => {
+
+export const logoutApi = () => {
   return dispatch => {
-      setTimeout(() => {
-          dispatch(logout());
-      }, expirationTime * 1000)
-  }
-}
+    console.log('tak')
+      
+      axios.defaults.headers = {
+        "Content-Type": "application/json",
+        'Authorization': `Token ${localStorage.getItem('token')}`
+        };    
+      axios.post('http://127.0.0.1:8000/api/auth/user/logout/')
+      .then((res) => {
+          console.log(res);
+          localStorage.removeItem('token');
+          localStorage.removeItem('expirationDate');
 
-export const authAddNotice = (form_data) => {
-
-        axios
-        .post("http://127.0.0.1:8000/api/notices/create/", form_data,{
-          headers: {
-            'content-type': 'multipart/form-data'
-          }
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch(function (error) {
+      })
+      .catch(function (error) {
           if (error.response) {
             console.log(error.response.data);
             console.log(error.response.status);
             console.log(error.response.headers);
           }
-        });
-    }
+        })
+        dispatch(logout())
+  }
+}
+
+export const checkAuthTimeout = (expirationTime) => {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expirationTime * 1000);
+  };
+};
+
+export const authAddNotice = (form_data) => {
+  axios
+    .post("http://127.0.0.1:8000/api/notices/create/", form_data, {
+      headers: {
+        "content-type": "multipart/form-data",
+        'Authorization': `Token ${localStorage.getItem('token')}`
+      },
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+    });
+};
 
 export const authEditNotice = (form_data, id) => {
-console.log(form_data)
-console.log(id)
+  console.log(form_data);
+  console.log(id);
 
-      axios
-      .put(`http://127.0.0.1:8000/api/notices/${id}/update/`, form_data,{
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
-      });
-  }
-
-  export const authDeleteNotice = (id) => {
-    
-    console.log(id)
-    
-          axios
-          .delete(`http://127.0.0.1:8000/api/notices/${id}/delete/`,{
-            headers: {
-              'content-type': 'application/json'
-            }
-          })
-          .then((response) => {
-            console.log(response);
-          })
-          .catch(function (error) {
-            if (error.response) {
-              console.log(error.response.data);
-              console.log(error.response.status);
-              console.log(error.response.headers);
-            }
-          });
+  axios
+    .put(`http://127.0.0.1:8000/api/notices/${id}/update/`, form_data, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
       }
+    });
+};
 
+export const authDeleteNotice = (id) => {
+  console.log(id);
 
-      export const authCheckState = () => {
-        return dispatch => {
-            const token = localStorage.getItem('token');
-            if (token === undefined) {
-                dispatch(logout());
-            } else {
-                const expirationDate = new Date(localStorage.getItem('expirationDate'));
-                if ( expirationDate <= new Date() ) {
-                    dispatch(logout());
-                } else {
-                    dispatch(authSuccess(token));
-                    dispatch(checkAuthTimeout( (expirationDate.getTime() - new Date().getTime()) / 1000) );
-                }
-            }
-        }
+  axios
+    .delete(`http://127.0.0.1:8000/api/notices/${id}/delete/`, {
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+    });
+};
+
+export const authLogin = (userData) => {
+  return (dispatch) => {
+    dispatch(authStart());
+    axios
+      .post("http://127.0.0.1:8000/api/auth/user/login/", userData)
+      .then((res) => {
+
+        const token = res.data.token;
+        console.log(token)
+
+        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+        localStorage.setItem("token", token);
+        localStorage.setItem("expirationDate", expirationDate);
+
+        dispatch(authSuccess(token));
+        dispatch(checkAuthTimeout(3600));
+      })
+      .catch((err) => {
+        dispatch(authFail(err));
+      });
+  };
+};
+
+export const authSignup = (userData) => {
+  return (dispatch) => {
+    dispatch(authStart());
+    axios
+      .post("http://127.0.0.1:8000/api/auth/user/register/", userData)
+      .then((res) => {
+        const token = res.data.token;
+        console.log(token)
+        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+        localStorage.setItem("token", token);
+        localStorage.setItem("expirationDate", expirationDate);
+        this.props.history.push("/dashboard");
+        dispatch(authSuccess(token));
+        dispatch(checkAuthTimeout(3600));
+      })
+      .catch((err) => {
+        dispatch(authFail(err));
+      });
+  };
+};
+
+export const authCheckState = () => {
+  return (dispatch) => {
+    const token = localStorage.getItem("token");
+    if (token === undefined) {
+      dispatch(logout());
+    } else {
+      const expirationDate = new Date(localStorage.getItem("expirationDate"));
+      if (expirationDate <= new Date()) {
+        dispatch(logout());
+      } else {
+        dispatch(authSuccess(token));
+        dispatch(
+          checkAuthTimeout(
+            (expirationDate.getTime() - new Date().getTime()) / 1000
+          )
+        );
+      }
     }
-
-  //   export const authEditNotice = (form_data) => {
-
-
-  //     axios
-  //     .put(`http://127.0.0.1:8000/api/notices/${id}/update/`, form_data,{
-  //       headers: {
-  //         'content-type': 'multipart/form-data'
-  //       }
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       if (error.response) {
-  //         console.log(error.response.data);
-  //         console.log(error.response.status);
-  //         console.log(error.response.headers);
-  //       }
-  //     });
-  // }
+  };
+};

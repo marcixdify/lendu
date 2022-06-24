@@ -8,12 +8,19 @@ import { connect } from 'react-redux';
 import { ToastContainer } from "react-toastify";
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.onTryAutoSignup();
+    console.log(this.props)
+
+  }
+  
   render() {
     return (
       <div>
         <BrowserRouter>
         
-          <Navbar />
+          <Navbar {...this.props}/>
           <ToastContainer hideProgressBar={true} newestOnTop={true} />
           <BaseRouter />
         </BrowserRouter>

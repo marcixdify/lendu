@@ -7,7 +7,8 @@ import EditNotice from "./containers/EditNotice";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import requireAuth from "./utils/RequireAuth";
+import Dashboard from "./components/dashboard/Dashboard"
 
 const BaseRouter = () => (
   <Routes>
@@ -18,6 +19,8 @@ const BaseRouter = () => (
     <Route path="/notice/:id" element={<NoticePage />} />
     <Route path="/notice/edit/:id" element={<EditNotice />} />
     <Route path="/notice/add" element={<AddNotice />} />
+    <Route path="/dashboard" element={<Dashboard />} />
+
   </Routes>
 );
 

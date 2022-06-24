@@ -34,16 +34,16 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_test_user(self, email, password, phone, **extra_fields):
+    def create_test_user(self, email, password, username, phone, **extra_fields):
         extra_fields.setdefault('status', 'ACTIVE')
-        user=self.create_user(email, password, TEST, **extra_fields)
-        user_info = TestUser(user=user,phone=phone)
+        user=self.create_user(email, password,  TEST, **extra_fields)
+        user_info = TestUser(user=user,phone=phone, username=username)
         user_info.save()
         return user
 
 class User(AbstractUser):
 
-    username = None
+    username =  None
     first_name = None
     last_name = None
 
@@ -90,6 +90,7 @@ class TestUser(models.Model):
         verbose_name="Numer kontaktowy",
         null = True,
     )
-    
+    username =  models.CharField(max_length=20)
+
     def __str__(self):
         return "{}".format(self.phone)

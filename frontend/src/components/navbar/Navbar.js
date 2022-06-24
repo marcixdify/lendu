@@ -1,7 +1,43 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment } from "react";
+import { Link, NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-const Navbar = () => {
+import { connect } from 'react-redux';
+import { withRouter } from "../withRouter";
+import * as actions from '../../store/actions/auth'
+
+class Navbar extends React.Component {
+  render(){
+
+    const guestLinks = (
+      <Fragment>
+          <Link to="/login/">
+            <a class="nav-link">Logowanie</a>
+          </Link>
+          <Link to="/register/">
+            <a class="nav-link">Rejestracja</a>
+          </Link>
+  
+  
+      </Fragment>
+  );
+
+    const authLinks = (
+      
+    
+      <Fragment>
+          <li className='nav-item'>
+              <NavLink className='nav-link' to='/dashboard'>Dashboard</NavLink>
+          </li>
+          <li className='nav-item'>
+              <a className='nav-link' onClick={ this.props.logout } href="/">Logout</a>
+          </li>
+          <Link to="/notice/add">
+              <a class="nav-link">Dodaj ogłoszenie</a>
+            </Link>
+
+      </Fragment>
+  );
+console.log(this.props.isAuthenticated)
   return (
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -26,26 +62,28 @@ const Navbar = () => {
               <a class="nav-link">Strona główna</a>
             </Link>
           </li>
-          <Link to="/login/">
-            <a class="nav-link">Logowanie</a>
-          </Link>
-          <Link to="/register/">
-            <a class="nav-link">Rejestracja</a>
-          </Link>
+
           <li class="nav-item">
             <Link to="/notices/">
               <a class="nav-link">Lista ogłoszeń</a>
             </Link>
           </li>
-          <li class="nav-item">
-            <Link to="/notice/add">
-              <a class="nav-link">Dodaj ogłoszenie</a>
-            </Link>
-          </li>
+
+          {this.props.isAuthenticated ? authLinks : guestLinks}
+
+          {this.props.children}
+
         </ul>
       </div>
     </nav>
   );
+}
 };
 
-export default Navbar;
+const mapDispatchToProps = dispatch => {
+  return {
+      logout: () => dispatch(actions.logoutApi()) 
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(Navbar));
