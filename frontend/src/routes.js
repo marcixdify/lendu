@@ -9,6 +9,7 @@ import Register from "./components/register/Register";
 import "bootstrap/dist/css/bootstrap.min.css";
 import requireAuth from "./utils/RequireAuth";
 import Dashboard from "./components/dashboard/Dashboard"
+import ResetPassword from "./components/dashboard/resetPassword/ResetPassword"
 
 const BaseRouter = () => (
   <Routes>
@@ -20,7 +21,7 @@ const BaseRouter = () => (
     <Route path="/notice/edit/:id" element={<EditNotice />} />
     <Route path="/notice/add" element={<AddNotice />} />
     <Route path="/dashboard" element={<Dashboard />} />
-
+    <Route path="/dashboard/reset-password" element={<ResetPassword />} />
   </Routes>
 );
 

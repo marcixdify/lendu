@@ -83,3 +83,18 @@ class AccountTestUserSerializer(serializers.ModelSerializer):
         fields = ['identifier', 'email','phone', 'username',]
 
     phone = serializers.IntegerField(source='testuser.phone')
+
+
+class ChangePasswordUserSerializer(serializers.Serializer):
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True, validators=[validate_password])
+    new_password2 = serializers.CharField(required=True)
+
+    class Meta:
+        model = User
+
+    def validate(self, data):
+        if data.get('new_password') != data.get('new_password2'):
+            raise serializers.ValidationError("Those passwords don't match.")
+        return data

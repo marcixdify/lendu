@@ -8,9 +8,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 import django.contrib.auth
 from knox.models import AuthToken
 from django.http import Http404
-from .serializers import UserSerializer, LoginSerializer, LoginUserSerializer, AccountTestUserSerializer
+from .serializers import UserSerializer, LoginSerializer, LoginUserSerializer, AccountTestUserSerializer, ChangePasswordUserSerializer
 User = django.contrib.auth.get_user_model()
-
+from rest_framework import generics, permissions, status
 
 
 
@@ -62,3 +62,34 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class ChangePasswordUserView(generics.UpdateAPIView):
+
+    serializer_class = ChangePasswordUserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    model = User
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            response = {
+                'status': 'success',
+                'code': status.HTTP_200_OK,
+                'message': 'Password updated successfully',
+                'data': []
+            }
+
+            return Response(response)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
