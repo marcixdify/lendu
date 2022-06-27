@@ -104,6 +104,12 @@ class NoticeListAPIView(generics.ListAPIView):
     filterset_fields = ('category__name', 'author__username')
 
 
+@api_view(['GET'])
+def getNotices (request):
+    notices = Notice.objects.all()
+    serializer = NoticeSerializer(notices, many=True)
+    return Response(serializer.data)
+
 class NoticeCreateAPIView(generics.CreateAPIView):
     """
     Create: a recipe
@@ -122,7 +128,7 @@ class  NoticeAPIView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Notice.objects.all()
     serializer_class = NoticeSerializer
-    permission_classes = (IsAuthorOrReadOnly,)
+    permission_classes = ()
 
 
 class  NoticeLikeAPIView(generics.CreateAPIView):

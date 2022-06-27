@@ -55,7 +55,7 @@ class Notice(models.Model):
         settings.AUTH_USER_MODEL, related_name="recipes", on_delete=models.CASCADE)
     NoticeTitle = models.CharField(max_length=50)
     NoticeCategory = models.CharField(max_length=50, blank=True, default="Brak")
-    NoticeImg = models.ImageField(upload_to=upload_to, default='images/brak-jpg.jpg', blank=True, null=True)
+    NoticeImg = models.ImageField(upload_to=upload_to, default='images/brak-jpg.jpg')
     NoticeDescription = models.CharField( max_length=200)
     NoticeDateAdd = models.DateTimeField(auto_now_add=True)
     NoticeCredit = MoneyField(decimal_places=2,default=0,default_currency='PLN',max_digits=11,)

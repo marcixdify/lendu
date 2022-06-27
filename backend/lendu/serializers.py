@@ -37,6 +37,7 @@ from lendu.models import  NoticeLike, Notice
 
 class  NoticeSerializer(serializers.ModelSerializer):
     NoticeOwner = serializers.PrimaryKeyRelatedField(read_only=True)
+    NoticeImg = serializers.ImageField(required=False)
     username = serializers.SerializerMethodField()
     total_number_of_likes = serializers.SerializerMethodField()
 
