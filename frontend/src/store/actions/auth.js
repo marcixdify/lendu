@@ -134,7 +134,7 @@ export const authLogin = (userData) => {
     axios
       .post("http://127.0.0.1:8000/api/auth/user/login/", userData)
       .then((res) => {
-
+        console.log(res)
         const token = res.data.token;
         console.log(token)
 

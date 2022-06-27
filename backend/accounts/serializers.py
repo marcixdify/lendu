@@ -81,7 +81,7 @@ class AccountTestUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['identifier', 'email','phone', 'username',]
-
+    username = serializers.CharField(source='testuser.username')
     phone = serializers.IntegerField(source='testuser.phone')
 
 
