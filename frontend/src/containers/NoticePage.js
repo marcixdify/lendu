@@ -130,7 +130,7 @@ class NoticePage extends Component {
             <h6 class="card-subtitle">Data dodania: {this.state.getDataNotice.NoticeDateAdd}</h6>
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-6">
-                    <div class="white-box text-center"><img src={'http://127.0.0.1:8000'+this.state.getDataNotice.NoticeImg} class="img-responsive"/></div>
+                    <div class="white-box text-center"><img src={this.state.getDataNotice.NoticeImg} class="img-responsive"/></div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-6">
                     <h4 class="box-title mt-5">Opis ogłoszenia:</h4>

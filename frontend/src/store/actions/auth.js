@@ -90,7 +90,7 @@ export const authEditNotice = (form_data, id) => {
   console.log(id);
 
   axios
-    .put(`http://127.0.0.1:8000/api/notices/${id}/update/`, form_data, {
+    .put(`http://127.0.0.1:8000/api/notices/${id}/`, form_data, {
       headers: {
         "content-type": "multipart/form-data",
       },
@@ -111,7 +111,7 @@ export const authDeleteNotice = (id) => {
   console.log(id);
 
   axios
-    .delete(`http://127.0.0.1:8000/api/notices/${id}/delete/`, {
+    .delete(`http://127.0.0.1:8000/api/notices/${id}/`, {
       headers: {
         "content-type": "application/json",
       },
