@@ -49,7 +49,9 @@ class Dashboard extends Component {
         <h1>Twoje dane:</h1>
         <h4>Email:{this.state.getUserData.email}</h4>
         <h4>identifier:{this.state.getUserData.identifier}</h4>
-
+        <Link to="reset-password/">
+        <button>Resetuj hasło</button>
+        </Link>
       </div>
     );
   }

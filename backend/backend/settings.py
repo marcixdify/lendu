@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'lendu.apps.LenduConfig',
+    'chat.apps.ChatConfig',
     'djmoney',
     'knox',
+    'channels',
     'accounts.apps.AccountsConfig',
 ]
 
@@ -153,3 +155,15 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 MEDIA_URL = '/media/'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+CHANNEL_LAYERS = {
+    'default' : {
+        'BACKEND' : 'channels_redis.core.RedisChannelLayer',
+        'CONFIG' : {
+            'hosts' : [('127.0.0.1',6379)],
+        }
+    }
+}
+
+ASGI_APPLICATION = "backend.routing.application"
