@@ -1,5 +1,8 @@
 import axios from "axios";
 import * as actionTypes from "./ActionTypes";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 export const authStart = () => {
   return {
@@ -25,6 +28,7 @@ export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
   logoutApi()
+ 
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
@@ -75,13 +79,20 @@ export const authAddNotice = (form_data) => {
     })
     .then((response) => {
       console.log(response);
+      if(response.status == 201){
+        toast("Poszło!")
+      }
     })
     .catch(function (error) {
       if (error.response) {
+        toast("ERROR EEEE co robisz?!")
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
       }
+      
+      
+      
     });
 };
 
@@ -97,9 +108,13 @@ export const authEditNotice = (form_data, id) => {
     })
     .then((response) => {
       console.log(response);
+      if(response.status == 200){
+      toast("Ogłoszenie zmodyfikowane!")
+      }
     })
     .catch(function (error) {
       if (error.response) {
+        toast("ERROR EEEE co robisz?!")
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
@@ -144,6 +159,7 @@ export const authLogin = (userData) => {
 
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600));
+        
       })
       .catch((err) => {
         dispatch(authFail(err));

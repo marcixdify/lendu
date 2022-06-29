@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Button } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { connect } from 'react-redux';
@@ -6,7 +6,9 @@ import { withRouter } from "../withRouter";
 import * as actions from '../../store/actions/auth'
 
 class Navbar extends React.Component {
+  
   render(){
+    console.log(this.props.isAuthenticated)
 
     const guestLinks = (
       <Fragment>
@@ -40,7 +42,7 @@ class Navbar extends React.Component {
 
       </Fragment>
   );
-console.log(this.props.isAuthenticated)
+//console.log(this.props.isAuthenticated)
   return (
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
