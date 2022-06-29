@@ -6,6 +6,7 @@ import * as actions from "../store/actions/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+
 import {
   Container,
   Button,
@@ -14,6 +15,7 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 
 
@@ -78,7 +80,7 @@ class EditNotice extends Component {
    
     let toSliceId = window.location.pathname
     let id = toSliceId.slice(13)
-    console.log("usuń")
+    toast("Ogłoszenie usunięte!")
     this.props.onAuthDelete(id)
   };
 
@@ -157,12 +159,16 @@ class EditNotice extends Component {
               </Form.Group>
 
             </Form>
+            <Link to={`/notices`}>
             <Button color="primary" onClick={this.onSignupClick}>
               Edytuj
             </Button>
+            </Link>
+            <Link to={`/notices`}>
             <Button color="primary" onClick={this.onDeleteClick}>
               Usuń
             </Button>
+            </Link>
           </Col>
         </Row>
       </Container>

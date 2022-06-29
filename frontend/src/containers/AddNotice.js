@@ -5,6 +5,8 @@ import PropTypes from "prop-types"; // new import
 import * as actions from "../store/actions/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Container,
   Button,
@@ -57,11 +59,14 @@ class AddNotice extends Component {
     console.log(form_data)
    // console.log(userData.NoticeTitle, userData.NoticeDescription, userData.NoticeImg);
     this.props.onAuth(form_data); // <-- signup new user request
+    
   };
 
   render() {
     return (
+      
       <Container>
+        <ToastContainer draggable={false} transition={Zoom} autoClose={8000} />
         <Row>
           <Col md="4">
             <h1>Dodaj ogłoszenie</h1>
@@ -128,9 +133,11 @@ class AddNotice extends Component {
               </Form.Group>
 
             </Form>
+            <Link to={`/notices`}>
             <Button color="primary" onClick={this.onSignupClick}>
               Dodaj ogłoszenie
             </Button>
+            </Link>
           </Col>
         </Row>
       </Container>

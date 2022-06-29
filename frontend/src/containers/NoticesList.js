@@ -4,9 +4,12 @@ import {Link} from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from "axios";
 import {setAxiosAuthToken,  toastOnError } from "../utils/Utils";
+import SearchBar from '../components/SearchBar';
 const NoticesList = () => {
 
     let [notices, setNotices] = useState([])
+    const [filteredData, setFilteredData] = useState([]);
+    const [searchingWord, setSearchingWord] = useState([])
 
     useEffect(() =>{
         getNotices()
@@ -33,18 +36,43 @@ const NoticesList = () => {
         // console.log(data)
         // setNotices(data)
     }
+    const handleFilter = (event) =>{
+       const searchWord = event.target.value
+       const newFilter = notices.filter((value) =>{
+        console.log(value.NoticeTitle)
+        return value.NoticeTitle.includes(searchWord)
+       })
+       setFilteredData(newFilter)
+       setSearchingWord(searchWord)
 
+       //console.log(searchWord.length)
+    }
   return (
-    <div>
-        dsada
-        <div className="notices">
-            {/* <Link to="/notice/new/">
-            <button>Dodaj nowe ogłoszenie</button>
-            </Link> */}
-        {notices.map((notice, index) => (
+    
+    <div className="search">
+            <div className="searchInputs">
+                <input type="text" placeholder="Szukaj ogłoszenie..." onChange={handleFilter}/>
+                <div className="searchIcon"></div>
+            </div>
+
+            <div className="dataResult"></div>
+        
+        {searchingWord.length !=0 ? (
+        <div className="notices">  
+        {
+        filteredData.map((notice, index) => (
             <ListNotice key={index} notice={notice} />
         ))}
         </div>
+        ) : (
+        <div className="notices">  
+        {
+        notices.map((notice, index) => (
+            <ListNotice key={index} notice={notice} />
+        ))}
+        </div>
+        )
+        }
     </div>
   )
 }
