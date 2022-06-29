@@ -10,6 +10,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import requireAuth from "./utils/RequireAuth";
 import Dashboard from "./components/dashboard/Dashboard"
 import ResetPassword from "./components/dashboard/resetPassword/ResetPassword"
+import ListUser from "./components/chat/ListUser"
+import ListRoom from "./components/chat/ListRoom"
+import Chat from "./components/chat/Chat"
 
 const BaseRouter = () => (
   <Routes>
@@ -22,6 +25,9 @@ const BaseRouter = () => (
     <Route path="/notice/add" element={<AddNotice />} />
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/dashboard/reset-password" element={<ResetPassword />} />
+    <Route path="/chat/" element={<ListUser />} />
+    <Route path="/chat/list-room" element={<ListRoom />} />
+    <Route path="/chat/conversation/:id" element={<Chat />} />
   </Routes>
 );
 

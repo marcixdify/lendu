@@ -136,10 +136,10 @@ export const authLogin = (userData) => {
       .then((res) => {
         console.log(res)
         const token = res.data.token;
-        console.log(token)
-
+        const identifier = res.data.user.identifier;
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
+        localStorage.setItem("identifier", identifier);
         localStorage.setItem("expirationDate", expirationDate);
 
         dispatch(authSuccess(token));

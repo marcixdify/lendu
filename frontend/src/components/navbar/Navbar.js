@@ -33,7 +33,10 @@ class Navbar extends React.Component {
           </li>
           <Link to="/notice/add">
               <a class="nav-link">Dodaj ogłoszenie</a>
-            </Link>
+          </Link>
+          <Link to="/chat">
+              <a class="nav-link">Czat</a>
+          </Link>
 
       </Fragment>
   );

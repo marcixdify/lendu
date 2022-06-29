@@ -1,32 +1,73 @@
-from django.contrib.auth import get_user_model
 from django.db import models
+from accounts.models import User
+from .checksum import Checksum
+from django.conf import settings
+from django.utils.timezone import now
 
-User = get_user_model()
+class UsersInitConversation(models.Model):
 
+    user1_identifier = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        related_name = 'user1_chat_identifier',
+        default=None,
+        on_delete=models.CASCADE,
+        to_field='identifier',
+        blank=True, #na czas deweloperki tylko
+    )
 
-class Contact(models.Model):
-    user = models.ForeignKey(
-        User, related_name='friends', on_delete=models.CASCADE)
-    friends = models.ManyToManyField('self', blank=True)
+    user2_identifier = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        related_name = 'user2_chat_identifier',
+        on_delete=models.CASCADE,
+        default=None,
+        to_field='identifier',
+        blank=True, #na czas deweloperki tylko
+    )
 
-    def __str__(self):
-        return self.user.username
+    id_conversation = models.CharField(
+        unique=True,
+        editable=False,
+        max_length=25,
+        default=None,
+    )
+
+    created_at = models.DateTimeField(default=now, editable=False)
+
+    def save(self):
+        self.id_conversation = Checksum.calculate(self.user1_identifier.date_joined,self.user2_identifier.date_joined,self.user1_identifier.identifier,self.user2_identifier.identifier)
+        id_conversation = super(UsersInitConversation, self).save()
+        print(UsersInitConversation.objects.get(id_conversation=self.id_conversation))
+        IdConversation.objects.create(id_conversation=UsersInitConversation.objects.get(id_conversation=self.id_conversation))
+
+class IdConversation(models.Model):
+
+    id_conversation = models.OneToOneField(
+        UsersInitConversation,
+        to_field='id_conversation',
+        related_name = 'userinit_id',
+        on_delete=models.CASCADE,
+        default=None,
+        unique=True,
+    )
 
 
 class Message(models.Model):
-    contact = models.ForeignKey(
-        Contact, related_name='messages', on_delete=models.CASCADE)
+    user_identifier = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        related_name = 'user_chat_identifier',
+        on_delete=models.CASCADE,
+        to_field='identifier',
+        default=None, #na czas deweloperki tylko
+    )
+    id_conversation = models.ForeignKey(
+        IdConversation,
+        on_delete=models.CASCADE,
+        to_field='id_conversation',
+    )
     content = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField(
+        auto_now_add=True
+    )
 
-    def __str__(self):
-        return self.contact.user.username
-
-
-class Chat(models.Model):
-    participants = models.ManyToManyField(
-        Contact, related_name='chats', blank=True)
-    messages = models.ManyToManyField(Message, blank=True)
-
-    def __str__(self):
-        return "{}".format(self.pk)
+    class Meta:
+        ordering = ('date_added',)

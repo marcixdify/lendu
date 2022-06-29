@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'knox',
     'channels',
     'accounts.apps.AccountsConfig',
+
+
 ]
 
 REST_FRAMEWORK = {
