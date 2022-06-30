@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./ListNotice.css" 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import styles from "./Notice.css"
+import 'mdbreact/dist/css/mdb.css';
 
 const ListNotice = ({ notice }) => {
   console.log(notice)
@@ -52,7 +50,7 @@ const ListNotice = ({ notice }) => {
                             <div class="row align-items-center">
                                 <div class="col-2">
                                     <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Favorite">
-                                        <FontAwesomeIcon icon="fa-thin fa-heart" />
+                                        
                                     </button>
                                 </div>
                                 <div class="col-2">
