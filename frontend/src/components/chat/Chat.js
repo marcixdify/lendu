@@ -67,7 +67,7 @@ class Chat extends Component {
   };
 
   componentDidMount() {
-    const path = `ws://127.0.0.1:8000/ws/chat/messages/${this.state.room}/${this.state.user_2}/`;
+    const path = `ws://127.0.0.1:8000/ws/auth/chat/messages/${this.state.room}/${this.state.user_2}/`;
     //console.log(path);
     this.client = new WebSocket(path);
     //console.log(this.state.user_2);
