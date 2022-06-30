@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
+import 'mdbreact/dist/css/mdb.css';
 import reducer from './store/reducers/auth';
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

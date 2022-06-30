@@ -1,12 +1,10 @@
 import Navbar from "./components/navbar/Navbar";
-import "bootstrap/dist/css/bootstrap.min.css";
 import BaseRouter from "./routes";
 import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
 import * as actions from './store/actions/auth';
 import { connect } from 'react-redux';
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 
