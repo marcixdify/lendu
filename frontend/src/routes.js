@@ -27,7 +27,7 @@ const BaseRouter = () => (
     <Route path="/dashboard/reset-password" element={<ResetPassword />} />
     <Route path="/chat/" element={<ListUser />} />
     <Route path="/chat/list-room" element={<ListRoom />} />
-    <Route path="/chat/conversation/:id" element={<Chat />} />
+    <Route path="/chat/list-room/conversation/:id/:id" element={<Chat />} />
   </Routes>
 );
 

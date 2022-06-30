@@ -20,12 +20,19 @@ class Chat extends Component {
     user_1: "",
     user_2: "",
     id_conversation: "",
-    user2_identifier: {...this.props.location.user2_identifier}
+
 
   };
 
 
   componentWillMount() {
+    let url = window.location.pathname
+    let strs = url.split('/');
+    let user_2 = strs.at(-2)
+    let room = strs.at(-1)
+    this.setState({user_2})
+    this.setState({room})
+    console.log(room)
 
     console.log(this.state.user2_identifier)
     axios.defaults.headers = {
@@ -33,7 +40,7 @@ class Chat extends Component {
       Authorization: `Token ${localStorage.getItem("token")}`,
     };
     axios
-      .get(`http://127.0.0.1:8000/chat/messages/${this.state.room_name}/`)
+      .get(`http://127.0.0.1:8000/chat/messages/${room}/`)
       .then((response) => {
         //console.log(response.data);
         const messages = response.data;
@@ -60,7 +67,7 @@ class Chat extends Component {
   };
 
   componentDidMount() {
-    const path = `ws://127.0.0.1:8000/ws/auth/chat/messages/${this.state.room_name}/${this.state.user2_identifier}/`;
+    const path = `ws://127.0.0.1:8000/ws/chat/messages/${this.state.room}/${this.state.user_2}/`;
     //console.log(path);
     this.client = new WebSocket(path);
     //console.log(this.state.user_2);
