@@ -5,10 +5,8 @@ import { withRouter } from "../withRouter";
 import * as actions from "../../store/actions/auth";
 import navbarc from "./navbar.css";
 import logo from "../../assets/img/lendu-logo.png";
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.css"
-  rel="stylesheet"
-/>;
+import Footer from "../footer/Footer"
+
 class Navbar extends React.Component {
   render() {
     console.log(this.props.isAuthenticated);
@@ -31,11 +29,7 @@ class Navbar extends React.Component {
 
     const authLinks = (
       <Fragment>
-        <Link to="/dashboard">
-          <li class="nav-item">
-            <a class="nav-link">Logowanie</a>
-          </li>
-        </Link>
+
 
         <li class="nav-item">
           <a class="nav-link" onClick={this.props.logout} href="/">
@@ -193,6 +187,7 @@ class Navbar extends React.Component {
         </nav>
 
         {this.props.children}
+        <Footer/>
       </div>
     );
   }
