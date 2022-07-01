@@ -33,9 +33,9 @@ class App extends Component {
       <div>
         <BrowserRouter>
         
-          <Navbar {...this.props}/>
+          <Navbar {...this.props}>
           <ToastContainer hideProgressBar={true} newestOnTop={true} />
-          <BaseRouter />
+          <BaseRouter /></Navbar>
         </BrowserRouter>
       </div>
     );
