@@ -43,7 +43,7 @@ class  NoticeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notice
-        fields = ('id', 'NoticeOwner', 'NoticeTitle', 'NoticeCategory', 'NoticeImg', 'NoticeDescription', 'NoticeCredit', 'username','total_number_of_likes', )
+        fields = ('id', 'NoticeOwner', 'NoticeTitle', 'NoticeCategory', 'NoticeImg', 'NoticeDescription', 'NoticeCredit', 'username','total_number_of_likes', 'NoticeDateAdd', 'NoticeDateUpdate')
 
     def get_username(self, obj):
         return obj.NoticeOwner.username
