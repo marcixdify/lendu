@@ -12,7 +12,7 @@ const ListNotice = ({ notice }) => {
 
 
 <div class="col-md-6 notice" style={{maxWidth:"none"}}>
-			
+              
                 <div class="block product no-border z-depth-2-top z-depth-2--hover">
                     <div class="block-image">
                         <a href="#">
@@ -35,19 +35,16 @@ const ListNotice = ({ notice }) => {
                         <div class="product-buttons mt-4">
                             <div class="row align-items-center">
                                 <div class="col-2">
-                                    <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Favorite">
-                                        
-                                    </button>
-                                </div>
-                                <div class="col-2">
                                     <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare">
-                                        <i class="fa fa-share"></i>
+                                        <i class="fa fa-heart"></i>
                                     </button>
                                 </div>
                                 <div class="col-8">
+                                <Link to={`/notice/${notice.id}`}>
                                     <button type="button" class="btn btn-block btn-primary btn-circle btn-icon-left">
-                                        <i class="fa fa-shopping-cart"></i>Add to cart
+                                        Szczegóły
                                     </button>
+                                </Link>
                                 </div>
                             </div>
                         </div>
