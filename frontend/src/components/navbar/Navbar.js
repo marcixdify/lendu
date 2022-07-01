@@ -37,6 +37,12 @@ class Navbar extends React.Component {
           </a>
         </li>
 
+        <Link to="/dashboard">
+          <li class="nav-item">
+            <a class="nav-link">Dashboard</a>
+          </li>
+        </Link>
+
         <Link to="/notice/add">
           <li class="nav-item">
             <a class="nav-link">Dodaj ogłoszenie</a>
