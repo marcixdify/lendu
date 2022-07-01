@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import 'mdbreact/dist/css/mdb.css';
+import css from "./ListNotice.css"
+
 
 const ListNotice = ({ notice }) => {
   console.log(notice)
@@ -25,8 +25,8 @@ const ListNotice = ({ notice }) => {
 
 
 
-<div class="col-md-6 notice">
-			<Link to={`/notice/${notice.id}`}>
+<div class="col-md-6 notice" style={{maxWidth:"none"}}>
+			
                 <div class="block product no-border z-depth-2-top z-depth-2--hover">
                     <div class="block-image">
                         <a href="#">
@@ -67,7 +67,7 @@ const ListNotice = ({ notice }) => {
                         </div>
                     </div>
                 </div>
-				</Link>
+			
             </div>
 			
 

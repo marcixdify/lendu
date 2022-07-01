@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { setAxiosAuthToken, toastOnError } from "../utils/Utils";
 import SearchBar from '../components/SearchBar';
+//import css from "../components/ListNotice.css"
 const NoticesList = () => {
 
     let [notices, setNotices] = useState([])
@@ -68,9 +69,9 @@ const NoticesList = () => {
                                 ))}
                         </div></div></div>
             ) : (
-                <div class="container ">
+                <div class="container-fluid">
                     <div class="shop-default shop-cards shop-tech">
-                        <div class="row">
+                        <div class="row d-flex justify-content-center">
                             {
                                 notices.map((notice, index) => (
                                     <ListNotice key={index} notice={notice} />
