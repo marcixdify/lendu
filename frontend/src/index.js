@@ -28,9 +28,3 @@ const app = (
 
 
 ReactDOM.render(app, document.getElementById('root'))
-
-// root.render(
-//   <React.StrictMode>
-// {app}
-//   </React.StrictMode>
-// );
