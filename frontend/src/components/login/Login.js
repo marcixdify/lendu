@@ -20,6 +20,7 @@ class Login extends Component {
   };
 
   onLoginClick = () => {
+    console.log('tak')
     const userData = {
       email: this.state.email,
       password: this.state.password,
@@ -93,7 +94,7 @@ class Login extends Component {
                       }}
                       onClick={this.onLoginClick}
                     >
-                      Zaloguj się
+                      Zaloguj sięx
                     </button>
                   </div>
 

@@ -5,8 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import * as actions from './store/actions/auth';
 import { connect } from 'react-redux';
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
-import axios from 'axios';
-import { useNavigate } from "react-router-dom"
+
 
 //test2
 class App extends Component {
