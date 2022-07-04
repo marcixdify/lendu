@@ -69,7 +69,7 @@ const NoticesList = () => {
                                 ))}
                         </div></div></div>
             ) : (
-                <div class="container-fluid">
+                <div class="container">
                     <div class="shop-default shop-cards shop-tech">
                         <div class="row d-flex justify-content-center">
                             {
