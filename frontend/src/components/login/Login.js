@@ -15,17 +15,21 @@ class Login extends Component {
       password: "",
     };
   }
+  
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onLoginClick = () => {
+    
     const userData = {
       email: this.state.email,
       password: this.state.password,
     };
     this.props.onAuth(userData); // <--- login request
   };
+  
+  
   render() {
     return (
 
@@ -120,6 +124,7 @@ class Login extends Component {
     );
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {

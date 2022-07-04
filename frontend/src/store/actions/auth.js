@@ -11,13 +11,17 @@ export const authStart = () => {
 };
 
 export const authSuccess = (token) => {
+  //toast("Pomyślnie zalogowano!");
+  toast.success('Pomyślnie zalogowano!');
   return {
     type: actionTypes.AUTH_SUCCESS,
     token: token,
   };
+  
 };
 
 export const authFail = (error) => {
+  toast.error("Błędny login lub hasło!");
   return {
     type: actionTypes.AUTH_FAIL,
     error: error,
@@ -25,9 +29,12 @@ export const authFail = (error) => {
 };
 
 export const logout = () => {
+  toast.info("Pomyślnie wylogowano!");
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
   logoutApi()
+  
+  
  
   return {
     type: actionTypes.AUTH_LOGOUT,
@@ -80,19 +87,16 @@ export const authAddNotice = (form_data) => {
     .then((response) => {
       console.log(response);
       if(response.status == 201){
-        toast("Poszło!")
+        toast("Pomyślnie dodano ogłoszenie!")
       }
     })
     .catch(function (error) {
       if (error.response) {
-        toast("ERROR EEEE co robisz?!")
+        toast.error("Coś poszło nie tak!")
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
       }
-      
-      
-      
     });
 };
 
@@ -114,7 +118,7 @@ export const authEditNotice = (form_data, id) => {
     })
     .catch(function (error) {
       if (error.response) {
-        toast("ERROR EEEE co robisz?!")
+        toast.error("Coś poszło nie tak!")
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);

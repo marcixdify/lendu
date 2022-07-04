@@ -8,34 +8,33 @@ import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 
-//test2
+
+
+
 class App extends Component {
 
   componentDidMount() {
     this.props.onTryAutoSignup();
     console.log(this.props.isAuthenticated)
-   // console.log(this.props)
-    //if(this.props.isAuthenticated == true){
-      //console.log("ZALOGOWANO")
-    //}
-    
   }
-  
-  
-  
+
   render() {
-    // if(this.props.isAuthenticated == true){
-      
-    //   let navigate = useNavigate()
-    //   navigate(/notices)
-    // }
     return (
       <div>
         <BrowserRouter>
-        
           <Navbar {...this.props}>
-          <ToastContainer hideProgressBar={true} newestOnTop={true} />
-          <BaseRouter /></Navbar>
+            <ToastContainer
+              position="top-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover   
+            />
+            <BaseRouter /></Navbar>
         </BrowserRouter>
       </div>
     );

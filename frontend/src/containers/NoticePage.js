@@ -59,9 +59,7 @@ class NoticePage extends Component {
     console.log(this.state.id)
     axios.get(`http://127.0.0.1:8000/api/notices/${id}/`)
       .then((response) => {
-
         console.log(response);
-        console.log('opow')
         const getDataNotice = response.data;
         this.setState({ getDataNotice });
       })
