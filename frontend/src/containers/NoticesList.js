@@ -41,7 +41,7 @@ const NoticesList = () => {
         const searchWord = event.target.value
         const newFilter = notices.filter((value) => {
             console.log(value.NoticeTitle)
-            return value.NoticeTitle.includes(searchWord)
+            return value.NoticeTitle.toLowerCase().includes(searchWord.toLowerCase())
         })
         setFilteredData(newFilter)
         setSearchingWord(searchWord)
