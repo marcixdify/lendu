@@ -1,4 +1,5 @@
 import Navbar from "./components/navbar/Navbar";
+import Sidebar from "./components/sidebar/Sidebar";
 import BaseRouter from "./routes";
 import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -6,23 +7,19 @@ import * as actions from './store/actions/auth';
 import { connect } from 'react-redux';
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 
-//test
-
-
 
 class App extends Component {
 
   componentDidMount() {
     this.props.onTryAutoSignup();
     console.log(this.props.isAuthenticated)
+    
   }
 
   render() {
     return (
       <div>
-        <BrowserRouter>
-          <Navbar {...this.props}>
-            <ToastContainer
+        <ToastContainer
               position="top-right"
               autoClose={2000}
               hideProgressBar={false}
@@ -33,7 +30,11 @@ class App extends Component {
               draggable
               pauseOnHover   
             />
-            <BaseRouter /></Navbar>
+        <BrowserRouter>
+          <Navbar {...this.props}>
+          <Sidebar {...this.props}/>
+          <BaseRouter />
+          </Navbar> 
         </BrowserRouter>
       </div>
     );

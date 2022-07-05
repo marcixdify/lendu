@@ -14,6 +14,7 @@ import ListRoom from "./components/chat/ListRoom"
 import Chat from "./components/chat/Chat"
 import Test from './components/Test'
 import OwnNotice from './components/dashboard/ownNotice/OwnNotice'
+import Profile from "./components/profile/Profile";
 
 const BaseRouter = () => (
   <Routes>
@@ -25,6 +26,7 @@ const BaseRouter = () => (
     <Route path="/notice/edit/:id" element={<EditNotice />} />
     <Route path="/notice/add" element={<AddNotice />} />
     <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/profile" element={<Profile />} />
     <Route path="/dashboard/reset-password" element={<ResetPassword />} />
     <Route path="/dashboard/own-notice" element={<OwnNotice />} />
     <Route path="/chat/" element={<ListUser />} />
