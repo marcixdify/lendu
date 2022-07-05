@@ -12,6 +12,8 @@ import ResetPassword from "./components/dashboard/resetPassword/ResetPassword"
 import ListUser from "./components/chat/ListUser"
 import ListRoom from "./components/chat/ListRoom"
 import Chat from "./components/chat/Chat"
+import Test from './components/Test'
+import OwnNotice from './components/dashboard/ownNotice/OwnNotice'
 
 const BaseRouter = () => (
   <Routes>
@@ -24,9 +26,12 @@ const BaseRouter = () => (
     <Route path="/notice/add" element={<AddNotice />} />
     <Route path="/dashboard" element={<Dashboard />} />
     <Route path="/dashboard/reset-password" element={<ResetPassword />} />
+    <Route path="/dashboard/own-notice" element={<OwnNotice />} />
     <Route path="/chat/" element={<ListUser />} />
     <Route path="/chat/list-room" element={<ListRoom />} />
     <Route path="/chat/list-room/conversation/:id/:id" element={<Chat />} />
+    <Route path="/test" element={<Test />} />
+
   </Routes>
 );
 

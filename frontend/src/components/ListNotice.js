@@ -4,8 +4,7 @@ import css from "./ListNotice.css"
 
 
 const ListNotice = ({ notice }) => {
-  console.log(notice);
-  console.log(notice.NoticeDateAdd.slice(0, 10))
+
   return (
 
 

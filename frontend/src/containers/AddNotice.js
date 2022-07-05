@@ -5,7 +5,7 @@ import PropTypes from "prop-types"; // new import
 import * as actions from "../store/actions/auth";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import {
   Container,
   Button,
@@ -56,7 +56,7 @@ class AddNotice extends Component {
     let NoticeDescription = userData.NoticeDescription;
     let NoticeImg = userData.NoticeImg;
     console.log(form_data)
-   // console.log(userData.NoticeTitle, userData.NoticeDescription, userData.NoticeImg);
+
     this.props.onAuth(form_data); // <-- signup new user request
     
   };
@@ -64,82 +64,128 @@ class AddNotice extends Component {
   render() {
     return (
       
-      <Container>
+      <section
+        class=" gradient-custom"
+        style={{ backgroundColor: "rgba(196, 146, 36, 0.7)", color: "#FFB140" }}
+      >
         <ToastContainer draggable={false} transition={Zoom} autoClose={8000} />
-        <Row>
-          <Col md="4">
-            <h1>Dodaj ogłoszenie</h1>
-            <Form>
-              <Form.Group controlId="usernameId">
-                <Form.Label>Tytuł ogłoszenia:</Form.Label>
-                <Form.Control
-                  //isInvalid={this.props.createUser.usernameError}
-                  type="text"
-                  name="NoticeTitle"
-                  placeholder="Wprowadz tytul"
-                  value={this.state.NoticeTitle}
-                  onChange={this.onChange}
-                />
-              </Form.Group>
-
-              <Form.Group controlId="passwordId">
-                <Form.Label>Wprowadz opis</Form.Label>
-                <Form.Control
-                  // isInvalid={this.props.createUser.passwordError}
-                  type="text"
-                  name="NoticeDescription"
-                  placeholder="Wprowadz opis"
-                  value={this.NoticeDescription}
-                  onChange={this.onChange}
-                />
-              </Form.Group>
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div
+                class="card  "
+                style={{ borderRadius: "1rem", color: "#FFB140" }}
+              >
+                <div class="card-body p-5 text-center">
+                  <div class="mb-md-5 mt-md-4 pb-5">
+                    <h2
+                      class="fw-bold mb-2 text-uppercase"
+                      style={{ color: "#C33149" }}
+                    >
+                      Dodaj ogłoszenie
+                    </h2>
 
 
-              <Form.Group controlId="passwordId">
-                <Form.Label>Wprowadz kategorie</Form.Label>
-                <Form.Control
-                  // isInvalid={this.props.createUser.passwordError}
-                  type="text"
-                  name="NoticeCategory"
-                  placeholder="Wprowadz kategorie"
-                  value={this.NoticeCategory}
-                  onChange={this.onChange}
-                />
-              </Form.Group>
+                    <div class="form-outline form-white mb-4">
+                      <input
+                        type="text"
+                        id="typeEmailX"
+                        class="form-control form-control-lg"
+                        name="NoticeTitle"
+                        value={this.state.NoticeTitle}
+                        onChange={this.onChange}
+                      />
+                      <label class="form-label" for="typeEmailX">
+                        Tytuł ogłoszenia
+                      </label>
+                    </div>
+
+                    <div class="form-outline form-white mb-4">
+                      <textarea
+                        type="text"
+                        id="typePasswordX"
+                        class="form-control form-control-lg"
+                        value={this.NoticeDescription}
+                        onChange={this.onChange}
+                        name="NoticeDescription"
+                      ></textarea>
+                      <label class="form-label" for="typePasswordX">
+                      Wprowadź opis
+                      </label>
+                    </div>
+                    
+                    <div class="form-outline form-white mb-4">
+                    <select
+                    id="typeEmailX"
+                    class="form-control form-control-lg"
+                    name="NoticeCategory"
+                    value={this.NoticeCategory}
+                    onChange={this.onChange}
+                  >
+                    <option selected>Wybierz kategorie</option>
+                    <option value="Narzędzia">Narzędzia</option>
+                    <option value="Maszyny">Maszyny</option>
+                    <option value="Ogród">Ogród</option>
+                  </select>
+
+                      <label class="form-label" for="typeEmailX">
+                        Kategoria
+                      </label>
+                    </div>
+
+                    <div class="form-outline form-white mb-4">
+                      <input
+                        type="number"
+                        id="typeEmailX"
+                        class="form-control form-control-lg"
+                        name="NoticeCredit"
+                        value={this.NoticeCredit}
+                        onChange={this.onChange}
+                      />
+                      <label class="form-label" for="typeEmailX">
+                        Wprowadź cene
+                      </label>
+                    </div>
 
 
-              <Form.Group controlId="passwordId">
-                <Form.Label>Wprowadz cene</Form.Label>
-                <Form.Control
-                  // isInvalid={this.props.createUser.passwordError}
-                  type="number"
-                  name="NoticeCredit"
-                  placeholder="Wprowadz cene"
-                  value={this.NoticeCredit}
-                  onChange={this.onChange}
-                />
-              </Form.Group>
+                    <div class="form-outline form-white mb-4">
+                      <input
+                        type="file"
+                        id="typeEmailX"
+                        class="form-control form-control-lg"
+                        name="NoticeImg"
+                        value={this.NoticeCredit}
+                        accept="image/jpeg,image/png,image/gif,image/jpg"
+                        onChange={this.handleImageChange}
+                      />
+                      <label class="form-label" for="typeEmailX">
+                        Dodaj zdjęcie (opcjonalne)
+                      </label>
+                    </div>
 
-              <Form.Group controlId="passwordId">
-                <Form.Label>Dodaj zdjecie</Form.Label>
-                <Form.Control
-                  // isInvalid={this.props.createUser.passwordError}
-                  type="file"
-                  name="NoticeImg"
-                  accept="image/jpeg,image/png,image/gif,image/jpg"
-                  onChange={this.handleImageChange}
-                />
-              </Form.Group>
+                    {/* <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> */}
 
-            </Form>
-            <Link to={`/notices`}>
-            <Button color="primary" onClick={this.onSignupClick}>
-              Dodaj ogłoszenie
-            </Button>
-            </Link>
-          </Col>
-        </Row>
-      </Container>
+                    <button
+                      class="btn btn-outline btn-lg px-5"
+                      type="submit"
+                      style={{
+                        backgroundColor: "#C33149",
+                        color: "#FFB140",
+                        borderRadius: "20px",
+                      }}
+                      onClick={this.onSignupClick}
+                    >
+                      Dodaj ogłoszenie
+                    </button>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 }

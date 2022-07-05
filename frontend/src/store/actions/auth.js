@@ -109,12 +109,12 @@ export const authEditNotice = (form_data, id) => {
     .then((response) => {
       console.log(response);
       if(response.status == 200){
-      toast("Ogłoszenie zmodyfikowane!")
+      toast("Ogłoszenie zostało zmodyfikowane!")
       }
     })
     .catch(function (error) {
       if (error.response) {
-        toast("ERROR EEEE co robisz?!")
+        toast("Błąd podczas edycji.")
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);

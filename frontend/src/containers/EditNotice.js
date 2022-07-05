@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "../components/withRouter"; // new import
 import { connect } from "react-redux"; // new import
-import PropTypes from "prop-types"; // new import
 import * as actions from "../store/actions/auth";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import {
   Container,
@@ -14,7 +12,7 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
-import { toast } from "react-toastify";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 
 
 
@@ -29,6 +27,7 @@ class EditNotice extends Component {
       NoticeImg: "",
       NoticeCategory: "",
       NoticeCredit: "",
+      GetCurrentNotice: ""
     };
   }
 
@@ -43,9 +42,35 @@ class EditNotice extends Component {
 
   };
 
+  componentDidMount() {
+    let toSliceId = window.location.pathname
+    let id = toSliceId.slice(13);
+    this.state.id = id
+    console.log(this.state.id)
+    axios.get(`http://127.0.0.1:8000/api/notices/${id}/`)
+      .then((response) => {
+        console.log(response);
+        const NoticeTitle = response.data.NoticeTitle;
+        const NoticeDescription = response.data.NoticeDescription;
+        const NoticeCategory = response.data.NoticeCategory;
+        const NoticeCredit = response.data.NoticeCredit;
+        this.setState({ NoticeTitle });
+        this.setState({ NoticeDescription });
+        this.setState({ NoticeCategory });
+        this.setState({ NoticeCredit });
+
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+
+  }
 
 
-  // update function to call the action
   onSignupClick = () => {
     let form_data = new FormData();
     form_data.append('NoticeTitle', this.state.NoticeTitle,);
@@ -53,25 +78,10 @@ class EditNotice extends Component {
     form_data.append('NoticeCategory', this.state.NoticeCategory);
     form_data.append('NoticeCredit', this.state.NoticeCredit);
     form_data.append('NoticeImg', this.state.NoticeImg);
-    //console.log(form_data)
+
+
     let toSliceId = window.location.pathname
     let id = toSliceId.slice(13)
-
-    const userData = {
-      NoticeTitle: this.state.NoticeTitle,
-      NoticeDescription: this.state.NoticeDescription,
-      NoticeImg: this.state.NoticeImg,
-
-
-    };
-
-
-    let NoticeTitle = userData.NoticeTitle;
-    let NoticeDescription = userData.NoticeDescription;
-    let NoticeImg = userData.NoticeImg;
-    //console.log(userData.id)
-
-    // console.log(userData.NoticeTitle, userData.NoticeDescription, userData.NoticeImg);
     this.props.onAuth(form_data, id); // <-- signup new user request
   };
 
@@ -87,90 +97,142 @@ class EditNotice extends Component {
 
     return (
 
-      <Container>
-        <Row>
-          <Col md="4">
-            <h1>Edytuj ogłoszenie</h1>
-            <Form>
-              <Form.Group controlId="usernameId">
-                <Form.Label>Edytuj tytuł ogłoszenia:</Form.Label>
-                <Form.Control
-                  //isInvalid={this.props.createUser.usernameError}
-                  type="text"
-                  name="NoticeTitle"
-                  placeholder="Wprowadz tytul"
-                  value={this.state.NoticeTitle}
-                  onChange={this.onChange}
-                />
-              </Form.Group>
-              {/* <div>
-        <button onClick={handleSubmit}>aktualizuj</button>
-        <button onClick={deleteNotice}>usun ogloszenie</button>
-        <p>NotePage {notice?.NoticeTitle}</p>
-        <textarea onChange={(e) => {setNotice({...notice, 'NoticeDescription' : e.target.value})}} defaultValue={notice?.NoticeDescription}></textarea>
-    </div> */}
 
-              <Form.Group controlId="passwordId">
-                <Form.Label>Edytuj opis</Form.Label>
-                <Form.Control
-                  // isInvalid={this.props.createUser.passwordError}
-                  type="text"
-                  name="NoticeDescription"
-                  placeholder="Wprowadz opis"
-                  value={this.NoticeDescription}
-                  onChange={this.onChange}
-                />
-              </Form.Group>
 
-              <Form.Group controlId="passwordId">
-                <Form.Label>Edytuj kategorie</Form.Label>
-                <Form.Control
-                  // isInvalid={this.props.createUser.passwordError}
-                  type="text"
-                  name="NoticeCategory"
-                  placeholder="Edytuj kategoire"
-                  value={this.NoticeCategory}
-                  onChange={this.onChange}
-                />
-              </Form.Group>
+      <section
+        class=" gradient-custom"
+        style={{ backgroundColor: "rgba(196, 146, 36, 0.7)", color: "#FFB140" }}
+      >
+        <ToastContainer draggable={false} transition={Zoom} autoClose={8000} />
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div
+                class="card  "
+                style={{ borderRadius: "1rem", color: "#FFB140" }}
+              >
+                <div class="card-body p-5 text-center">
+                  <div class="mb-md-5 mt-md-4 pb-5">
+                    <h2
+                      class="fw-bold mb-2 text-uppercase"
+                      style={{ color: "#C33149" }}
+                    >
+                      Edytuj ogłoszenie
+                    </h2>
 
-              <Form.Group controlId="passwordId">
-                <Form.Label>Edytuj cene</Form.Label>
-                <Form.Control
-                  // isInvalid={this.props.createUser.passwordError}
-                  type="text"
-                  name="NoticeCredit"
-                  placeholder="Wprowadz cene"
-                  value={this.NoticeCredit}
-                  onChange={this.onChange}
-                />
-              </Form.Group>
 
-              <Form.Group controlId="passwordId">
-                <Form.Label>Edytuj zdjecie</Form.Label>
-                <Form.Control
-                  // isInvalid={this.props.createUser.passwordError}
-                  type="file"
-                  name="NoticeImg"
-                  accept="image/jpeg,image/png,image/gif,image/jpg"
-                  onChange={this.handleImageChange}
-                />
-              </Form.Group>
+                    <div class="form-outline form-white mb-4">
+                      <input
+                        type="text"
+                        id="typeEmailX"
+                        class="form-control form-control-lg"
+                        name="NoticeTitle"
+                        value={this.state.NoticeTitle}
+                        onChange={this.onChange}
+                      />
+                      <label class="form-label" for="typeEmailX">
+                        Tytuł ogłoszenia
+                      </label>
+                    </div>
 
-            </Form>
-            <Link to={`/notices`}>
-            <Button color="primary" onClick={this.onSignupClick}>
-              Edytuj
-            </Button>
-            </Link>
-            <Link to={`/notices`}>
-            <Button color="primary" onClick={this.onDeleteClick}>
-              Usuń
-            </Button>
-            </Link>
-          </Col>
-        </Row>
-      </Container>
+                    <div class="form-outline form-white mb-4">
+                      <textarea
+                        type="text"
+                        id="typePasswordX"
+                        class="form-control form-control-lg"
+                        value={this.state.NoticeDescription}
+                        onChange={this.onChange}
+                        name="NoticeDescription"
+                      ></textarea>
+                      <label class="form-label" for="typePasswordX">
+                      Edytuj opis
+                      </label>
+                    </div>
+                    
+                    <div class="form-outline form-white mb-4">
+                    <select
+                    id="typeEmailX"
+                    class="form-control form-control-lg"
+                    name="NoticeCategory"
+                    value={this.state.NoticeCategory}
+                    onChange={this.onChange}
+                  >
+                    <option selected>Wybierz kategorie</option>
+                    <option value="Narzędzia">Narzędzia</option>
+                    <option value="Maszyny">Maszyny</option>
+                    <option value="Ogród">Ogród</option>
+                  </select>
+
+                      <label class="form-label" for="typeEmailX">
+                        Kategoria
+                      </label>
+                    </div>
+
+                    <div class="form-outline form-white mb-4">
+                      <input
+                        type="number"
+                        id="typeEmailX"
+                        class="form-control form-control-lg"
+                        name="NoticeCredit"
+                        value={this.state.NoticeCredit}
+                        onChange={this.onChange}
+                      />
+                      <label class="form-label" for="typeEmailX">
+                        Edytuj cene
+                      </label>
+                    </div>
+
+
+                    <div class="form-outline form-white mb-4">
+                      <input
+                        type="file"
+                        id="typeEmailX"
+                        class="form-control form-control-lg"
+                        name="NoticeImg"
+                        value={this.NoticeCredit}
+                        accept="image/jpeg,image/png,image/gif,image/jpg"
+                        onChange={this.handleImageChange}
+                      />
+                      <label class="form-label" for="typeEmailX">
+                        Edytuj zdjęcie (opcjonalne)
+                      </label>
+                    </div>
+
+                    {/* <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> */}
+
+                    <button
+                      class="btn btn-outline btn-lg px-5"
+                      type="submit"
+                      style={{
+                        backgroundColor: "#C33149",
+                        color: "#FFB140",
+                        borderRadius: "20px",
+                      }}
+                      onClick={this.onSignupClick}
+                    >
+                      Edytuj ogłoszenie
+                    </button>
+                    <button
+                      class="btn btn-outline btn-lg px-5"
+                      type="submit"
+                      style={{
+                        backgroundColor: "#C33149",
+                        color: "#FFB140",
+                        borderRadius: "20px",
+                      }}
+                      onClick={this.onDeleteClick}
+                    >
+                      Usuń ogłoszenie
+                    </button>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
     )
   }

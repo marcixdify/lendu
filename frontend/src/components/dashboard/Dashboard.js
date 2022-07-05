@@ -52,6 +52,9 @@ class Dashboard extends Component {
         <Link to="reset-password/">
         <button>Resetuj hasło</button>
         </Link>
+        <Link to="own-notice/">
+        <button>Twoje ogłoszenia</button>
+        </Link>
       </div>
     );
   }
