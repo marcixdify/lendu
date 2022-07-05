@@ -97,8 +97,11 @@ class Profile extends Component {
                           <h6 class="text-muted f-w-400">{this.state.getUserData.identifier}</h6>
                         </div>
                         <div class="col-sm-6">
-                          <Link to="reset-password/">
+                          <Link to="/dashboard/reset-password">
                           <p class="m-b-10 f-w-600">Resetuj hasło</p>
+                          </Link>
+                          <Link to="/dashboard/own-notice">
+                          <p class="m-b-10 f-w-600">Moje ogłoszenia</p>
                           </Link>
                         </div>
                       </div>
