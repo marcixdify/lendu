@@ -9,8 +9,6 @@ import Footer from "../footer/Footer"
 
 class Navbar extends React.Component {
   render() {
-    //console.log(this.props.isAuthenticated);
-
     const guestLinks = (
       <Fragment>
         <Link to="/login/">

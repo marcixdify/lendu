@@ -68,7 +68,7 @@ class AddNotice extends Component {
         class=" gradient-custom"
         style={{ backgroundColor: "rgba(196, 146, 36, 0.7)", color: "#FFB140" }}
       >
-        <ToastContainer draggable={false} transition={Zoom} autoClose={8000} />
+        
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">

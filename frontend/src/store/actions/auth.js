@@ -4,6 +4,8 @@ import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
+
+
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START,
@@ -11,12 +13,13 @@ export const authStart = () => {
 };
 
 export const authSuccess = (token) => {
-  //toast("Pomyślnie zalogowano!");
   toast.success('Pomyślnie zalogowano!');
+  
   return {
     type: actionTypes.AUTH_SUCCESS,
     token: token,
   };
+  
   
 };
 
@@ -182,7 +185,6 @@ export const authSignup = (userData) => {
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
-        this.props.history.push("/dashboard");
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600));
       })

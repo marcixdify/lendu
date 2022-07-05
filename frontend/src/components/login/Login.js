@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 import { Container, Button, Row, Col, Form } from "react-bootstrap";
 import * as actions from "../../store/actions/auth";
 import { login } from "./LoginActions.js"; // new import
+import { Navigate } from "react-router-dom";
+
+
+
 
 class Login extends Component {
   constructor(props) {
@@ -15,25 +19,57 @@ class Login extends Component {
       password: "",
     };
   }
-  
+
+
+
+
+
+
+
+
+
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onLoginClick = () => {
-    
+
     const userData = {
       email: this.state.email,
       password: this.state.password,
     };
     this.props.onAuth(userData); // <--- login request
   };
-  
-  
+
+
   render() {
+
+    const guestLinks = (
+
+      <button
+        class="btn btn-outline btn-lg px-5"
+        type="submit"
+        style={{
+          backgroundColor: "#C33149",
+          color: "#FFB140",
+          borderRadius: "20px",
+        }}
+        onClick={this.onLoginClick}
+      >
+        Zaloguj się
+      </button>
+
+    );
+
+    const authLinks = (
+      <Navigate to="/notices" />
+    );
+
+
+
+    console.log("log: " + this.props.isAuthenticated);
     return (
 
-//d
       <section
         class="vh-100 gradient-custom"
         style={{ backgroundColor: "rgba(196, 146, 36, 0.7)", color: "#FFB140" }}
@@ -87,18 +123,7 @@ class Login extends Component {
 
                     {/* <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> */}
 
-                    <button
-                      class="btn btn-outline btn-lg px-5"
-                      type="submit"
-                      style={{
-                        backgroundColor: "#C33149",
-                        color: "#FFB140",
-                        borderRadius: "20px",
-                      }}
-                      onClick={this.onLoginClick}
-                    >
-                      Zaloguj się
-                    </button>
+                    {this.props.isAuthenticated ? authLinks : guestLinks}
                   </div>
 
                   <div>
@@ -130,13 +155,17 @@ const mapStateToProps = (state) => {
   return {
     loading: state.loading,
     error: state.error,
+    isAuthenticated: state.token !== null
   };
 };
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onAuth: (userData) => dispatch(actions.authLogin(userData)),
+    logout: () => dispatch(actions.logoutApi()),
   };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
