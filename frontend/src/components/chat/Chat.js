@@ -8,7 +8,8 @@ import {
   faSmile,
   faPaperPlane,
 } from "@fortawesome/fontawesome-free-solid";
-
+import Chaters from './Chaters';
+import * as actions from "./Chaters";
 
 class Chat extends Component {
   state = {
@@ -20,7 +21,7 @@ class Chat extends Component {
     user_1: "",
     user_2: "",
     id_conversation: "",
-
+    getChaters: [],
 
   };
 
@@ -53,6 +54,22 @@ class Chat extends Component {
           console.log(error.response.headers);
         }
       });
+
+      axios
+      .get(`http://127.0.0.1:8000/chat/list/${localStorage.getItem("identifier")}/chat/`)
+      .then((response) => {
+        console.log(response);
+        const getChaters = response.data;
+        this.setState({ getChaters });
+        this.props.onAuth(getChaters);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
   }
 
   onButtonClicked = (e) => {
@@ -65,6 +82,7 @@ class Chat extends Component {
     this.state.value = "";
     e.preventDefault();
   };
+
 
   componentDidMount() {
     const path = `ws://127.0.0.1:8000/ws/auth/chat/messages/${this.state.room}/${this.state.user_2}/`;
@@ -104,8 +122,10 @@ class Chat extends Component {
                 <h5 class="font-weight-bold mb-3 text-center text-lg-start">
                   Member
                 </h5>
-
-                <div class="card">
+                {this.state.getChaters.map((getChaters, index) => (
+          <Chaters key={index} getChaters={getChaters} />
+        ))}
+                {/* <div class="card">
                   <div class="card-body">
                     <ul class="list-unstyled mb-0">
                       <li class="p-2">
@@ -134,7 +154,8 @@ class Chat extends Component {
                       </li>
                     </ul>
                   </div>
-                </div>
+                </div> */}
+
               </div>
 
               <div class="col-md-6 col-lg-7 col-xl-8">
@@ -236,10 +257,10 @@ class Chat extends Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    passChaters: (getChaters) => dispatch(actions.Chaters(getChaters)),
+  };
+};
 
 export default (Chat);

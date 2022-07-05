@@ -41,12 +41,16 @@ class  NoticeSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField()
     total_number_of_likes = serializers.SerializerMethodField()
 
+
+
     class Meta:
         model = Notice
-        fields = ('id', 'NoticeOwner', 'NoticeTitle', 'NoticeCategory', 'NoticeImg', 'NoticeDescription', 'NoticeCredit', 'username','total_number_of_likes', 'NoticeDateAdd', 'NoticeDateUpdate')
+        fields = ('id', 'NoticeOwner', 'NoticeTitle', 'NoticeCategory', 'NoticeImg', 'NoticeDescription', 'NoticeCredit', 'username','total_number_of_likes', 'NoticeDateAdd', 'NoticeDateUpdate', 'identifier')
+
+    identifier = serializers.IntegerField(source='NoticeOwner.identifier', read_only=True)
 
     def get_username(self, obj):
-        return obj.NoticeOwner.username
+        return obj.NoticeOwner.testuser.username
 
     def get_category_name(self, obj):
         return obj.category.name
@@ -54,8 +58,8 @@ class  NoticeSerializer(serializers.ModelSerializer):
     def get_total_number_of_likes(self, obj):
         return obj.get_total_number_of_likes()
 
-    def get_total_number_of_bookmarks(self, obj):
-        return obj.get_total_number_of_bookmarks()
+    # def get_identifier(self, obj):
+    #     return obj.NoticeOwner.testuser.username
 
 
 
