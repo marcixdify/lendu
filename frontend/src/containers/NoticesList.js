@@ -62,7 +62,7 @@ const NoticesList = () => {
             {searchingWord.length != 0 ? (
                 <div class="container">
                     <div class="shop-default shop-cards shop-tech">
-                        <div class="row">
+                        <div class="row d-flex justify-content-center">
                             {
                                 filteredData.map((notice, index) => (
                                     <ListNotice key={index} notice={notice} />

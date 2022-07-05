@@ -9,7 +9,7 @@ import Footer from "../footer/Footer"
 
 class Navbar extends React.Component {
   render() {
-    console.log(this.props.isAuthenticated);
+    //console.log(this.props.isAuthenticated);
 
     const guestLinks = (
       <Fragment>
