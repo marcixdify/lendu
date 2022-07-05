@@ -39,12 +39,22 @@ class ListRoom extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Lista pokojów:</h1>
+      <section style={{ backgroundColor: "eee" }}>
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+            <h5 class="font-weight-bold mb-3 text-center text-lg-start">
+              Member
+            </h5>
         {this.state.getRoom.map((getRoom, index) => (
           <Room href key={index} getRoom={getRoom} />
         ))}
-      </div>
+
+
+</div>
+            </div>
+          </div>
+        </section>
     );
   }
 }

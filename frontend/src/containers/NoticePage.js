@@ -113,7 +113,29 @@ class NoticePage extends Component {
     this.props.onAuth(form_data, id); // <-- signup new user request
   };
 
-
+  createRoom = () => {
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    };
+    axios
+      .post(`http://127.0.0.1:8000/chat/list/${localStorage.getItem("identifier")}/create/`, {
+        user1_identifier: `${localStorage.getItem("identifier")}`,
+        user2_identifier: `${this.state.getDataNotice.identifier}`
+    
+  }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+  }
   render() {
 
     return (
@@ -147,7 +169,7 @@ class NoticePage extends Component {
 					<div class="details col-md-6">
             
 						<h3 class="product-title">{this.state.getDataNotice.NoticeTitle}</h3>
-            <p class="product-description">Użytkownik: { this.state.getDataNotice.username }</p>
+            <p class="product-description">Użytkownik: {this.state.getDataNotice.username}</p>
 
 						<div class="rating">
 							<div class="stars">
@@ -168,7 +190,9 @@ class NoticePage extends Component {
 						</h5>
 
 						<div class="action">
-							<button class="add-to-cart btn btn-default" type="button">Napisz wiadomość</button>
+              <Link to="/chat/list-room">
+							<button class="add-to-cart btn btn-default" type="button" onClick={this.createRoom}>Napisz wiadomość</button>
+              </Link>
 							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
 						</div>
               <Link to={`/notice/edit/${this.state.id}`}>
