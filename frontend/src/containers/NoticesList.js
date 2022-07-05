@@ -49,8 +49,7 @@ const NoticesList = () => {
         //console.log(searchWord.length)
     }
     return (
-
-        <div className="container">
+        <div className="notice-container">
             <div className="d-flex justify-content-center h-100">
                 <div className="search">
                     <input className="search-input" type="text" placeholder="Szukaj ogłoszenie..." onChange={handleFilter} />
