@@ -38,7 +38,7 @@
 a.active,a:hover{
   border-left: 5px solid var(--accent-color);
   color: #fff;
-   background: linear-gradient(to left, var(--accent-color), var(--gradient-color));
+   /* background: linear-gradient(to left, var(--accent-color), var(--gradient-color)); */
 }
 .sidebar a i{
   font-size: 23px;

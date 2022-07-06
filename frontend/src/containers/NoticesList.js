@@ -54,6 +54,7 @@ const NoticesList = () => {
                 <div className="search">
                     <input className="search-input" type="text" placeholder="Szukaj ogłoszenie..." onChange={handleFilter} />
                 </div>
+                
             </div>
 
             <div className="dataResult"></div>

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 
 
+
 class App extends Component {
 
   componentDidMount() {

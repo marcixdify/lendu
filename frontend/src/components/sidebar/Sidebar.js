@@ -26,15 +26,11 @@ class Sidebar extends React.Component {
           <header>Menu</header>
 
 
-          <Link to="/profile">
-            <i class="fas fa-qrcode"></i>
-            <span>Profil</span>
-          </Link>
-
           <Link to="/dashboard">
-            <i class="fas fa-link"></i>
+            <i class="fas fa-qrcode"></i>
             <span>Dashboard</span>
           </Link>
+
 
           <Link to="/notices">
             <i class="fas fa-stream"></i>
@@ -51,17 +47,17 @@ class Sidebar extends React.Component {
             <span>Dodaj</span>
           </Link>
 
-          <Link to="/chat">
+          <Link to="/chat/list-room">
             <i class="fas fa-sliders-h"></i>
             <span>Konwersacje</span>
           </Link>
 
-          <Link to="/dashboard/me">
+          <Link to="/dashboard">
             <i class="fas fa-link"></i>
             <span>O mnie</span>
           </Link>
 
-          <Link to="/settings">
+          <Link to="/dashboard">
             <i class="fas fa-qrcode"></i>
             <span>Ustawienia</span>
           </Link>
