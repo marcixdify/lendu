@@ -32,7 +32,7 @@ class App extends Component {
             />
         <BrowserRouter>
           <Navbar {...this.props}>
-          <Sidebar {...this.props}/>
+          {this.props.isAuthenticated ? <Sidebar {...this.props}/> : null}
           <BaseRouter />
           </Navbar> 
         </BrowserRouter>
