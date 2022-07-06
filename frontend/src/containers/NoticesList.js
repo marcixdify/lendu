@@ -31,11 +31,6 @@ const NoticesList = () => {
                 toastOnError(error);
             });
 
-
-        // let response = await fetch('http://127.0.0.1:8000/api/notices/')
-        // let data = await response.json()
-        // console.log(data)
-        // setNotices(data)
     }
     const handleFilter = (event) => {
         const searchWord = event.target.value

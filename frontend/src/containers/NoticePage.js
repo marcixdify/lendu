@@ -176,28 +176,22 @@ class NoticePage extends Component {
             <p class="product-description">Użytkownik: {this.state.getDataNotice.username}</p>
 
 						<div class="rating">
-							<div class="stars">
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-							</div>
-							<span class="review-no">41 reviews</span>
+            <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare" style={{background:'none', border:'none'}}>
+                <i class="fa fa-heart" > {this.state.getDataNotice.total_number_of_likes}</i>
+                </button>
 						</div>
             <h3 class="product-title">Opis:</h3>
 						<p class="product-description">{ this.state.getDataNotice.NoticeDescription }</p>
 						<h4 class="price">Cena: <span>{ this.state.getDataNotice.NoticeCredit } zł</span></h4>
-						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
 						<h5 class="sizes">Kategoria:
 							<span class="size" data-toggle="tooltip" title="small">{this.state.getDataNotice.NoticeCategory}</span>
 						</h5>
 
 						<div class="action">
               <Link to="/chat/list-room">
-							<button class="add-to-cart btn btn-default" type="button" onClick={this.createRoom}>Napisz wiadomość</button>
+							<button class="add-to-cart btn" type="button" onClick={this.createRoom} style={{background:'rgb(195, 49, 73)', color: "#fff"}}>Napisz wiadomość</button>
               </Link>
-							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+							<button class="like btn btn" type="button" style={{background:'rgb(195, 49, 73)'}}><span class="fa fa-heart"></span></button>
 						</div>
 
               {button}

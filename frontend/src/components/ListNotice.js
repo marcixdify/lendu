@@ -1,9 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import css from "./ListNotice.css"
-
-
+import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee, faHeartBroken } from '@fortawesome/free-solid-svg-icons'
 const ListNotice = ({ notice }) => {
+<link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+console.log(notice)
+
+  function like (){
+    console.log('klik')
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    };
+    axios
+    .post(`http://127.0.0.1:8000/api/notices/${notice.id}/like/`)
+    .then(response => {
+        console.log('udalo sie')
+    })
+    .catch(error => {
+    });
+  }
+
+  function unlike (){
+    console.log('klik')
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    };
+    axios
+    .delete(`http://127.0.0.1:8000/api/notices/${notice.id}/like/`)
+    .then(response => {
+        console.log('udalo sie')
+    })
+    .catch(error => {
+    });
+  }
 
   return (
 
@@ -38,8 +71,9 @@ const ListNotice = ({ notice }) => {
           <div class="product-buttons mt-4">
             <div class="row align-items-center">
               <div class="col-2">
-                <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare">
-                  <i class="fa fa-heart"></i>
+
+                <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare" onClick={unlike}>
+                <FontAwesomeIcon icon='trash'/>
                 </button>
               </div>
               <div class="col-8">
@@ -50,8 +84,11 @@ const ListNotice = ({ notice }) => {
                 </Link>
               </div>
               <div class="col-2">
-                <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare">
-                  <i class="fa fa-heart"></i>
+                {/* <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare">
+                  <i class="fa fa-heart" onClick={like}></i>
+                </button> */}
+                <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare" onClick={like}>
+                <i class="fa fa-heart" > {notice.total_number_of_likes}</i>
                 </button>
               </div>
 

@@ -851,3 +851,7 @@ a>.block {
 a:link{
     text-decoration: none;
 }
+
+.fa-heart:hover{
+    color: red;
+}
