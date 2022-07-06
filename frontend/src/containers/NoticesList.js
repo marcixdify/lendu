@@ -46,9 +46,45 @@ const NoticesList = () => {
     return (
         <div className="notice-container">
             <div className="d-flex justify-content-center h-100">
+                
+                <div class="container">
+        <div class="row">
+        <div class="col-sm-8">
+            <div class="single category">
+              <h3 class="side-title">Wyszukiwanie ogłoszeń</h3>
+              <ul class="list-unstyled">
+                <li>
                 <div className="search">
                     <input className="search-input" type="text" placeholder="Szukaj ogłoszenie..." onChange={handleFilter} />
                 </div>
+                </li>
+
+
+
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="single category">
+              <h3 class="side-title">Kategorie</h3>
+              <ul class="list-unstyled">
+                <li>
+                  <p>Narzędzia </p><i class="fa-solid fa-lightbulb-on"></i>
+                </li>
+                <li>
+                  <p>Maszyny </p>
+                </li>
+                <li>
+                  <p>Ogród </p>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
                 
             </div>
 
@@ -65,7 +101,7 @@ const NoticesList = () => {
                         </div></div></div>
             ) : (
                 <div class="container">
-                    <div class="shop-default shop-cards shop-tech">
+                    <div class="shop-default shop-cards shop-tech"  style={{marginTop:"30px"}}>
                         <div class="row d-flex justify-content-center">
                             {
                                 notices.map((notice, index) => (
