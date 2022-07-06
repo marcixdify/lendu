@@ -4,9 +4,9 @@ import { useLocation } from "react-router-dom";
 import { connect } from "react-redux"; // new import
 import PropTypes from "prop-types"; // new import
 import { Link, Outlet } from "react-router-dom"; // new import
+import { useDispatch, useSelector } from "react-redux";
 
-
-class Dashboard extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,33 +69,39 @@ class Dashboard extends Component {
                         <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image" />
                       </div>
                       <h6 class="f-w-600">{this.state.getUserData.username}</h6>
-                      <p>Web Designer</p>
+                      <p>Użytkownik</p>
                       <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                     </div>
                   </div>
                   <div class="col-sm-8">
                     <div class="card-block">
-                      <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                      <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Informacje</h6>
                       <div class="row">
                         <div class="col-sm-6">
                           <p class="m-b-10 f-w-600">Email</p>
                           <h6 class="text-muted f-w-400">{this.state.getUserData.email}</h6>
                         </div>
                         <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Phone</p>
+                          <p class="m-b-10 f-w-600">Telefon</p>
                           <h6 class="text-muted f-w-400">{this.state.getUserData.phone}</h6>
                         </div>
-                      </div>
-                      <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
-                      <div class="row">
                         <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Identifier</p>
+                          <p class="m-b-10 f-w-600">Identyfikator</p>
                           <h6 class="text-muted f-w-400">{this.state.getUserData.identifier}</h6>
                         </div>
+                      </div>
+                      <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Zardządzanie</h6>
+                      <div class="row">
                         <div class="col-sm-6">
-                          <Link to="reset-password/">
+                        <Link to="/dashboard/own-notice">
+                          <p class="m-b-10 f-w-600">Moje ogłoszenia</p>
+                          </Link>
+                        </div>
+                        <div class="col-sm-6">
+                          <Link to="/dashboard/reset-password">
                           <p class="m-b-10 f-w-600">Resetuj hasło</p>
                           </Link>
+                          
                         </div>
                       </div>
                       <ul class="social-link list-unstyled m-t-40 m-b-10">
@@ -125,6 +131,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 
