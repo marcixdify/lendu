@@ -137,6 +137,10 @@ class NoticePage extends Component {
       });
   }
   render() {
+    let button;
+    if (this.state.getDataNotice.identifier == `${localStorage.getItem("identifier")}`){
+      button = <Link to={`/notice/edit/${this.state.id}`}> <a  class="btn btn-primary">Edytuj ogłoszenie</a></Link>;
+    }
 
     return (
 
@@ -195,9 +199,8 @@ class NoticePage extends Component {
               </Link>
 							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
 						</div>
-              <Link to={`/notice/edit/${this.state.id}`}>
-        <a  class="btn btn-primary">Edytuj ogłoszenie</a>
-         </Link>
+
+              {button}
 					</div>
 				</div>
 			</div>

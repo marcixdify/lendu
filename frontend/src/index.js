@@ -11,7 +11,7 @@ import 'mdbreact/dist/css/mdb.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "react-toastify/dist/ReactToastify.css";
 import reducer from './store/reducers/auth';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(reducer, composeEnhances(
