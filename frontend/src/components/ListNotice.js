@@ -8,14 +8,15 @@ export const  ListNotice = ( getNotice ) => {
 <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
 console.log(getNotice)
 
-  function like (){
+const like = (file) =>{
+    console.log(file)
     console.log('klik')
     axios.defaults.headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${localStorage.getItem("token")}`,
     };
     axios
-    .post(`http://127.0.0.1:8000/api/notices/${getNotice.getNotice.id}/like/`)
+    .post(`http://127.0.0.1:8000/api/notices/${file}/like/`)
     .then(response => {
         console.log('udalo sie')
     })
@@ -23,14 +24,14 @@ console.log(getNotice)
     });
   }
 
-  function unlike (){
+  const unlike = (file) =>{
     console.log('klik')
     axios.defaults.headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${localStorage.getItem("token")}`,
     };
     axios
-    .delete(`http://127.0.0.1:8000/api/notices/${getNotice.getNotice.id}/like/`)
+    .delete(`http://127.0.0.1:8000/api/notices/${file}/like/`)
     .then(response => {
         console.log('udalo sie')
     })
@@ -75,7 +76,7 @@ console.log(getNotice)
               <div class="col-2">
 
                 <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare" onClick={() => {
-                    like(
+                    unlike(
                       `${getNotice.id}`
                     );
                   }}>
@@ -91,7 +92,11 @@ console.log(getNotice)
               </div>
               <div class="col-2">
 
-                <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare" onClick={like}>
+                <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare" onClick={() => {
+                    like(
+                      `${getNotice.id}`
+                    );
+                  }}>
                 <i class="fa fa-heart" > {getNotice.total_number_of_likes}</i>
                 </button>
               </div>
