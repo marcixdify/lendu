@@ -15,7 +15,7 @@ import {
   FormControl,
 } from "react-bootstrap";
 
-//import { authAddNotice } from "../store/actions/auth"; // new import
+
 
 class AddNotice extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class AddNotice extends Component {
 
 };
 
-  // update function to call the action
+
   onSignupClick = () => {
     let form_data = new FormData();
     form_data.append('NoticeTitle', this.state.NoticeTitle,);
@@ -52,12 +52,10 @@ class AddNotice extends Component {
       NoticeDescription: this.state.NoticeDescription,
       NoticeImg: this.state.NoticeImg
     };
-    let NoticeTitle = userData.NoticeTitle;
-    let NoticeDescription = userData.NoticeDescription;
-    let NoticeImg = userData.NoticeImg;
+
     console.log(form_data)
 
-    this.props.onAuth(form_data); // <-- signup new user request
+    this.props.onAuth(form_data); 
     
   };
 

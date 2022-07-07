@@ -5,7 +5,6 @@ import PropTypes from "prop-types"; // new import
 import { Link } from "react-router-dom";
 import { Container, Button, Row, Col, Form } from "react-bootstrap";
 import * as actions from "../../store/actions/auth";
-import { login } from "./LoginActions.js"; // new import
 import { Navigate } from "react-router-dom";
 
 
@@ -121,7 +120,6 @@ class Login extends Component {
                       </label>
                     </div>
 
-                    {/* <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> */}
 
                     {this.props.isAuthenticated ? authLinks : guestLinks}
                   </div>

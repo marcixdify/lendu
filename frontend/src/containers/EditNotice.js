@@ -82,7 +82,7 @@ class EditNotice extends Component {
 
     let toSliceId = window.location.pathname
     let id = toSliceId.slice(13)
-    this.props.onAuth(form_data, id); // <-- signup new user request
+    this.props.onAuth(form_data, id); 
   };
 
   onDeleteClick = () => {
@@ -198,7 +198,7 @@ class EditNotice extends Component {
                       </label>
                     </div>
 
-                    {/* <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> */}
+
 
                     <button
                       class="btn btn-outline btn-lg px-5"

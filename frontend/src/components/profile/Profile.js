@@ -48,14 +48,6 @@ class Profile extends Component {
 
   render() {
     return (
-      // <div>
-      //   <h1>Twoje dane:</h1>
-      //   <h4>Email:{this.state.getUserData.email}</h4>
-      //   <h4>identifier:{this.state.getUserData.identifier}</h4>
-      //   <Link to="reset-password/">
-      //   <button>Resetuj hasło</button>
-      //   </Link>
-      // </div>
 
       <div class="page-content page-container" id="page-content">
         <div class="padding">
@@ -122,7 +114,7 @@ class Profile extends Component {
   }
 }
 
-// connect action and store and component
+
 const mapStateToProps = (state) => {
   return {};
 };
