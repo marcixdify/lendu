@@ -163,7 +163,6 @@ class AddNotice extends Component {
                       </label>
                     </div>
 
-                    {/* <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> */}
 
                     <button
                       class="btn btn-outline btn-lg px-5"
@@ -190,15 +189,7 @@ class AddNotice extends Component {
   }
 }
 
-// connect action and reducer
-// replace
-// export default Signup;
-// with code below:
 
-// AddNotice.propTypes = {
-//   signupNewUser: PropTypes.func.isRequired,
-//   createUser: PropTypes.object.isRequired
-// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -207,8 +198,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// const mapStateToProps = state => ({
-//   createUser: state.createUser
-// });
 
 export default connect(mapDispatchToProps)(withRouter(AddNotice));

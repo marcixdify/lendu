@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee, faHeartBroken } from '@fortawesome/free-solid-svg-icons'
 const ListNotice = ({ notice }) => {
 <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-console.log(notice)
+//console.log(notice)
 
   function like (){
     console.log('klik')
@@ -24,7 +24,7 @@ console.log(notice)
   }
 
   function unlike (){
-    console.log('klik')
+    //console.log('klik')
     axios.defaults.headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${localStorage.getItem("token")}`,
@@ -84,9 +84,6 @@ console.log(notice)
                 </Link>
               </div>
               <div class="col-2">
-                {/* <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare">
-                  <i class="fa fa-heart" onClick={like}></i>
-                </button> */}
                 <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare" onClick={like}>
                 <i class="fa fa-heart" > {notice.total_number_of_likes}</i>
                 </button>
