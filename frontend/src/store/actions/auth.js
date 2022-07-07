@@ -180,7 +180,10 @@ export const authSignup = (userData) => {
     axios
       .post("http://127.0.0.1:8000/api/auth/user/register/", userData)
       .then((res) => {
+        console.log(res)
         const token = res.data.token;
+        const identifier = res.data.user.identifier;
+        localStorage.setItem("identifier", identifier);
         console.log(token)
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
