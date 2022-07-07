@@ -5,8 +5,8 @@ import PropTypes from "prop-types"; // new import
 import * as actions from "../store/actions/auth";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import axios from 'axios';
-import NoticeStyle from './NoticeStyle.css'
+import axios from "axios";
+import NoticeStyle from "./NoticeStyle.css";
 
 import {
   Container,
@@ -17,29 +17,11 @@ import {
   FormControl,
 } from "react-bootstrap";
 
-
-
 class NoticePage extends Component {
-  //let noticeId = match.params.id;
 
 
+  deleteNotice = async () => {};
 
-
-  deleteNotice = async () => {
-  }
-  //   fetch(`http://127.0.0.1:8000/api/notices/${id}/delete/`, {
-  //     method: 'DELETE',
-  //     'headers':{
-  //       'Content-Type': 'application/json'
-  //     }
-
-  //   })
-  // }
-
-  // let handleSubmit = ()=> {
-  //   updateNotice();
-
-  // }
 
   constructor(props, id) {
     super(props);
@@ -48,16 +30,17 @@ class NoticePage extends Component {
       NoticeDescription: "",
       NoticeImg: "",
       getDataNotice: [],
-      id: id
+      id: id,
     };
   }
 
   componentWillMount() {
-    let toSliceId = window.location.pathname
+    let toSliceId = window.location.pathname;
     let id = toSliceId.slice(8);
-    this.state.id = id
-    console.log(this.state.id)
-    axios.get(`http://127.0.0.1:8000/api/notices/${id}/`)
+    this.state.id = id;
+    console.log(this.state.id);
+    axios
+      .get(`http://127.0.0.1:8000/api/notices/${id}/`)
       .then((response) => {
         console.log(response);
         const getDataNotice = response.data;
@@ -70,9 +53,7 @@ class NoticePage extends Component {
           console.log(error.response.headers);
         }
       });
-
   }
-
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -80,37 +61,27 @@ class NoticePage extends Component {
 
   handleImageChange = (e) => {
     this.setState({ [e.target.name]: e.target.files[0] });
-
   };
 
-
-
-  // update function to call the action
   onSignupClick = () => {
     let form_data = new FormData();
-    form_data.append('NoticeTitle', this.state.NoticeTitle,);
-    form_data.append('NoticeDescription', this.state.NoticeDescription);
-    form_data.append('NoticeImg', this.state.NoticeImg);
-    console.log(form_data)
-    let toSliceId = window.location.pathname
-    let id = toSliceId.slice(8)
-
+    form_data.append("NoticeTitle", this.state.NoticeTitle);
+    form_data.append("NoticeDescription", this.state.NoticeDescription);
+    form_data.append("NoticeImg", this.state.NoticeImg);
+    console.log(form_data);
+    let toSliceId = window.location.pathname;
+    let id = toSliceId.slice(8);
 
     const userData = {
       NoticeTitle: this.state.NoticeTitle,
       NoticeDescription: this.state.NoticeDescription,
       NoticeImg: this.state.NoticeImg,
-
-
     };
 
-    let NoticeTitle = userData.NoticeTitle;
-    let NoticeDescription = userData.NoticeDescription;
-    let NoticeImg = userData.NoticeImg;
-    console.log(userData.id)
+    console.log(userData.id);
 
-    // console.log(userData.NoticeTitle, userData.NoticeDescription, userData.NoticeImg);
-    this.props.onAuth(form_data, id); // <-- signup new user request
+
+    this.props.onAuth(form_data, id); 
   };
 
   createRoom = () => {
@@ -119,11 +90,14 @@ class NoticePage extends Component {
       Authorization: `Token ${localStorage.getItem("token")}`,
     };
     axios
-      .post(`http://127.0.0.1:8000/chat/list/${localStorage.getItem("identifier")}/create/`, {
-        user1_identifier: `${localStorage.getItem("identifier")}`,
-        user2_identifier: `${this.state.getDataNotice.identifier}`
-    
-  }
+      .post(
+        `http://127.0.0.1:8000/chat/list/${localStorage.getItem(
+          "identifier"
+        )}/create/`,
+        {
+          user1_identifier: `${localStorage.getItem("identifier")}`,
+          user2_identifier: `${this.state.getDataNotice.identifier}`,
+        }
       )
       .then((response) => {
         console.log(response);
@@ -135,84 +109,108 @@ class NoticePage extends Component {
           console.log(error.response.headers);
         }
       });
-  }
+  };
   render() {
     let button;
-    if (this.state.getDataNotice.identifier == `${localStorage.getItem("identifier")}`){
-      button = <Link to={`/notice/edit/${this.state.id}`}> <a  class="btn btn-primary">Edytuj ogłoszenie</a></Link>;
+    if (
+      this.state.getDataNotice.identifier ==
+      `${localStorage.getItem("identifier")}`
+    ) {
+      button = (
+        <Link to={`/notice/edit/${this.state.id}`}>
+          {" "}
+          <a class="btn btn-primary">Edytuj ogłoszenie</a>
+        </Link>
+      );
     }
 
     return (
+      <div class="container">
+        <div
+          class="card"
+          style={{ marginTop: "50px", padding: "3em", lineHeight: "1.5em" }}
+        >
+          <div class="container-fliud">
+            <div class="wrapper row">
+              <div class="preview col-md-6">
+                <div class="preview-pic tab-content">
+                  <div class="tab-pane active" id="pic-1">
+                    <img src={this.state.getDataNotice.NoticeImg} />
+                  </div>
+                </div>
+              </div>
+              <div class="details col-md-6">
+                <h3 class="product-title">
+                  {this.state.getDataNotice.NoticeTitle}
+                </h3>
+                <p class="product-description">
+                  Użytkownik: {this.state.getDataNotice.username}
+                </p>
 
+                <div class="rating">
+                  <button
+                    type="button"
+                    class="btn-icon"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title=""
+                    data-original-title="Compare"
+                    style={{ background: "none", border: "none" }}
+                  >
+                    <i class="fa fa-heart">
+                      {" "}
+                      {this.state.getDataNotice.total_number_of_likes}
+                    </i>
+                  </button>
+                </div>
+                <h3 class="product-title">Opis:</h3>
+                <p class="product-description">
+                  {this.state.getDataNotice.NoticeDescription}
+                </p>
+                <h4 class="price">
+                  Cena: <span>{this.state.getDataNotice.NoticeCredit} zł</span>
+                </h4>
+                <h5 class="sizes">
+                  Kategoria:
+                  <span class="size" data-toggle="tooltip" title="small">
+                    {this.state.getDataNotice.NoticeCategory}
+                  </span>
+                </h5>
 
+                <div class="action">
+                  <Link to="/chat/list-room">
+                    <button
+                      class="add-to-cart btn"
+                      type="button"
+                      onClick={this.createRoom}
+                      style={{ background: "rgb(195, 49, 73)", color: "#fff" }}
+                    >
+                      Napisz wiadomość
+                    </button>
+                  </Link>
+                  <button
+                    class="like btn btn"
+                    type="button"
+                    style={{ background: "rgb(195, 49, 73)" }}
+                  >
+                    <span class="fa fa-heart"></span>
+                  </button>
+                </div>
 
-<div class="container">
-		<div class="card" style={{marginTop: '50px',
-    padding: '3em',
-    lineHeight: '1.5em'}}>
-			<div class="container-fliud">
-				<div class="wrapper row">
-					<div class="preview col-md-6">
-						
-						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><img src={this.state.getDataNotice.NoticeImg} /></div>
-						  {/* <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div> */}
-						</div>
-						{/* <ul class="preview-thumbnail nav nav-tabs">
-						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-2" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-3" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						</ul> */}
-						
-					</div>
-					<div class="details col-md-6">
-            
-						<h3 class="product-title">{this.state.getDataNotice.NoticeTitle}</h3>
-            <p class="product-description">Użytkownik: {this.state.getDataNotice.username}</p>
-
-						<div class="rating">
-            <button type="button" class="btn-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Compare" style={{background:'none', border:'none'}}>
-                <i class="fa fa-heart" > {this.state.getDataNotice.total_number_of_likes}</i>
-                </button>
-						</div>
-            <h3 class="product-title">Opis:</h3>
-						<p class="product-description">{ this.state.getDataNotice.NoticeDescription }</p>
-						<h4 class="price">Cena: <span>{ this.state.getDataNotice.NoticeCredit } zł</span></h4>
-						<h5 class="sizes">Kategoria:
-							<span class="size" data-toggle="tooltip" title="small">{this.state.getDataNotice.NoticeCategory}</span>
-						</h5>
-
-						<div class="action">
-              <Link to="/chat/list-room">
-							<button class="add-to-cart btn" type="button" onClick={this.createRoom} style={{background:'rgb(195, 49, 73)', color: "#fff"}}>Napisz wiadomość</button>
-              </Link>
-							<button class="like btn btn" type="button" style={{background:'rgb(195, 49, 73)'}}><span class="fa fa-heart"></span></button>
-						</div>
-
-              {button}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-    )
+                {button}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
-
 const mapDispatchToProps = (dispatch) => {
-
   return {
-
-    onAuth: (form_data, id) =>
-      dispatch(actions.authEditNotice(form_data, id)),
+    onAuth: (form_data, id) => dispatch(actions.authEditNotice(form_data, id)),
   };
-}
+};
 
 export default connect(mapDispatchToProps)(withRouter(NoticePage));

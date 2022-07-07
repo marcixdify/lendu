@@ -13,7 +13,6 @@ import {
   FormControl
 } from "react-bootstrap";
 
-import { signupNewUser } from "./RegisterActions"; // new import
 
 
 class Register extends Component {
@@ -66,80 +65,7 @@ class Register extends Component {
 
     console.log("reg: " + this.props.isAuthenticated);
     return (
-      // <Container>
-      //   <Row>
-      //     <Col md="4">
-      //       <h1>Sign up</h1>
-      //       <Form>
-      //         <Form.Group controlId="usernameId">
-      //           <Form.Label>Nazwa użytkownika:</Form.Label>
-      //           <Form.Control
 
-      //             type="text"
-      //             name="username"
-      //             placeholder="Enter user name"
-      //             value={this.state.username}
-      //             onChange={this.onChange}
-      //           />
-      //           <FormControl.Feedback type="invalid">
-
-      //           </FormControl.Feedback>
-      //         </Form.Group>
-
-      //         <Form.Group controlId="usernameId">
-      //           <Form.Label>E-mail:</Form.Label>
-      //           <Form.Control
-
-      //             type="email"
-      //             name="email"
-      //             placeholder="Enter email"
-      //             value={this.state.email}
-      //             onChange={this.onChange}
-      //           />
-      //           <FormControl.Feedback type="invalid">
-
-      //           </FormControl.Feedback>
-      //         </Form.Group>
-
-
-      //         <Form.Group controlId="usernameId">
-      //           <Form.Label>Telefon:</Form.Label>
-      //           <Form.Control
-
-      //             type="number"
-      //             name="phone"
-      //             placeholder="Wpisz numer telefonu"
-      //             value={this.state.phone}
-      //             onChange={this.onChange}
-      //           />
-      //           <FormControl.Feedback type="invalid">
-
-      //           </FormControl.Feedback>
-      //         </Form.Group>
-
-      //         <Form.Group controlId="passwordId">
-      //           <Form.Label>Hasło:</Form.Label>
-      //           <Form.Control
-
-      //             type="password"
-      //             name="password"
-      //             placeholder="Enter password"
-      //             value={this.state.password}
-      //             onChange={this.onChange}
-      //           />
-      //           <Form.Control.Feedback type="invalid">
-      //           </Form.Control.Feedback>
-      //         </Form.Group>
-      //       </Form>
-      //       <Button color="primary" onClick={this.onSignupClick}>
-      //         Sign up
-      //       </Button>
-      //       <p className="mt-2">
-      //         Already have account? <Link to="/login">Login</Link>
-      //       </p>
-      //     </Col>
-      //   </Row>
-      // </Container>
 
       <section
         class="vh-100 gradient-custom"
@@ -221,7 +147,7 @@ class Register extends Component {
                       </label>
                     </div>
 
-                    {/* <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> */}
+
 
                     {this.props.isAuthenticated ? authLinks : guestLinks}
                   </div>
@@ -250,10 +176,7 @@ class Register extends Component {
   }
 }
 
-// connect action and reducer
-// replace 
-// export default Signup;
-// with code below:
+
 
 const mapStateToProps = (state) => {
   return {

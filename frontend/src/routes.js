@@ -6,7 +6,6 @@ import AddNotice from "./containers/AddNotice";
 import EditNotice from "./containers/EditNotice";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
-import requireAuth from "./utils/RequireAuth";
 import Dashboard from "./components/dashboard/Dashboard"
 import ResetPassword from "./components/dashboard/resetPassword/ResetPassword"
 import ListUser from "./components/chat/ListUser"
@@ -29,8 +28,8 @@ const BaseRouter = () => (
     <Route path="/profile" element={<Profile />} />
     <Route path="/dashboard/reset-password" element={<ResetPassword />} />
     <Route path="/dashboard/own-notice" element={<OwnNotice />} />
-    <Route path="/chat/" element={<ListUser />} />
     <Route path="/chat/list-room" element={<ListRoom />} />
+    {/* <Route path="/chat/list-room" element={<ListRoom />} /> */}
     <Route path="/chat/list-room/conversation/:id/:id" element={<Chat />} />
     <Route path="/test" element={<Test />} />
 

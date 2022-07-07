@@ -47,14 +47,13 @@ class Navbar extends React.Component {
           </li>
         </Link>
 
-        <Link to="/chat">
+        <Link to="/chat/list-room">
           <li class="nav-item">
             <a class="nav-link">Czat</a>
           </li>
         </Link>
       </Fragment>
     );
-    //console.log(this.props.isAuthenticated)
     return (
       <div>
         <nav class="navbar navbar-expand-lg navbar-orange bg-white">

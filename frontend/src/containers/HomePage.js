@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import ListNotice from '../components/ListNotice';
+import ListNoticeHome from '../components/ListNoticeHome';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -80,7 +80,7 @@ const HomePage = () => {
                         <div class="row d-flex justify-content-center">
                             {
                                 notices.map((notice, index) => (
-                                    <ListNotice key={index} notice={notice} />
+                                    <ListNoticeHome key={index} notice={notice} />
                                 ))}
                         </div></div></div>
             
@@ -148,6 +148,6 @@ const HomePage = () => {
 
     )
 }
-// 2.09.48
+
 
 export default HomePage
